@@ -1,14 +1,14 @@
 package com.compfest.sea.repository.product;
 
-import com.compfest.sea.delivery.product.payload.InsertProductPayload;
 import com.compfest.sea.usecase.product.Product;
+import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository("productRepoList")
 public class ProductListDAO implements ProductDAO{
-    List<Product> products;
+    List<Product> products = new ArrayList<>();
 
     @Override
     public List<String> insert(Product product) {
