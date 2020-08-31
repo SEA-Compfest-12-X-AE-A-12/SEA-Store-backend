@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository("productRepoList")
-public class ProductListDAO implements ProductDAO{
+public class ProductDAOList implements ProductDAO{
     List<Product> products = new ArrayList<>();
 
     @Override

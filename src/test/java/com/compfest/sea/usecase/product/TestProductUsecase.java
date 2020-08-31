@@ -2,7 +2,7 @@ package com.compfest.sea.usecase.product;
 
 import com.compfest.sea.delivery.product.payload.InsertProductPayload;
 import com.compfest.sea.repository.product.ProductDAO;
-import com.compfest.sea.repository.product.ProductListDAO;
+import com.compfest.sea.repository.product.ProductDAOList;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 public class TestProductUsecase {
 
     @Mock
-    private static ProductDAO productDAO = mock(ProductListDAO.class);
+    private static ProductDAO productDAO = mock(ProductDAOList.class);
     ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO);
 
 

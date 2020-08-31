@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Component("productDelivery1")
-public class ProductDeliveryImpl implements ProductDelivery {
+public class ProductDeliveryHttp implements ProductDelivery {
     private final ProductUsecase productUsecase;
 
     @Autowired
-    public ProductDeliveryImpl(@Qualifier("productUsecase1") ProductUsecase productUsecase) {
+    public ProductDeliveryHttp(@Qualifier("productUsecase1") ProductUsecase productUsecase) {
         this.productUsecase = productUsecase;
     }
 
