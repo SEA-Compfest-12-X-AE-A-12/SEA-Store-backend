@@ -22,9 +22,4 @@ public class ProductDeliveryHttp implements ProductDelivery {
     public List<String> insert(InsertProductPayload insertProductPayload) {
         return productUsecase.insert(insertProductPayload);
     }
-
-    @Override
-    public String ping() {
-        return "pong";
-    }
 }

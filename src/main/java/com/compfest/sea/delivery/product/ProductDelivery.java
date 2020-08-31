@@ -14,7 +14,4 @@ import java.util.List;
 public interface ProductDelivery {
     @PostMapping("/insert")
     public List<String> insert(@RequestBody InsertProductPayload insertProductPayload);
-
-    @GetMapping("/ping")
-    public String ping();
 }

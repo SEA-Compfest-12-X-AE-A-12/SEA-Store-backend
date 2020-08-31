@@ -42,12 +42,7 @@ public class TestProductUsecase {
     @Test
     public void insertValidProduct(){
         InsertProductPayload validProductPayload = new InsertProductPayload(
-          10,
-          1,
-          "p1",
-          "prod1",
-          1,
-          10000
+          10, 1, "p1", "prod1", 1, 10000
         );
         try {
             Product product = Adapter.convertInsertPayloadToModel(validProductPayload);
@@ -64,12 +59,7 @@ public class TestProductUsecase {
     @Test
     public void insertInvalidProduct(){
         InsertProductPayload validProductPayload = new InsertProductPayload(
-          -10,
-          1,
-          "p1",
-          "prod1",
-          1,
-          10000
+          -10, 1, "p1", "prod1", 1, 10000
         );
         try {
             Product product = Adapter.convertInsertPayloadToModel(validProductPayload);
