@@ -5,6 +5,6 @@ import com.compfest.sea.usecase.product.Product;
 import java.util.List;
 
 public interface ProductDAO {
-    List<String> insert(Product product);
+    Integer insert(Product product) throws Exception;
 
 }

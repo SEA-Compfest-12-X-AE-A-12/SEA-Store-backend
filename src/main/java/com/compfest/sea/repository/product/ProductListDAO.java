@@ -11,15 +11,10 @@ public class ProductListDAO implements ProductDAO{
     List<Product> products = new ArrayList<>();
 
     @Override
-    public List<String> insert(Product product) {
-        List<String> messages = new ArrayList<>();
-        try{
-            product.setId(products.size());
-            products.add(product);
-            messages.add("Success add new product");
-        }catch (Exception e ){
-            messages.add(String.valueOf(e));
-        }
-        return messages;
+    public Integer insert(Product product) throws Exception{
+        int currId = products.size();
+        product.setId(currId);
+        products.add(product);
+        return currId;
     }
 }
