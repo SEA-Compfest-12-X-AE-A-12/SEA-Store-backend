@@ -58,13 +58,13 @@ public class TestProductUsecase {
 
     @Test
     public void insertInvalidProduct(){
-        InsertProductPayload validProductPayload = new InsertProductPayload(
+        InsertProductPayload invalidProductPayload = new InsertProductPayload(
           -10, 1, "p1", "prod1", 1, 10000
         );
         try {
-            Product product = Adapter.convertInsertPayloadToModel(validProductPayload);
+            Product product = Adapter.convertInsertPayloadToModel(invalidProductPayload);
             Mockito.when(productDAO.insert(product)).thenReturn(1);
-            List<String> messages = productUsecase.insert(validProductPayload);
+            List<String> messages = productUsecase.insert(invalidProductPayload);
             List<String> expected = Arrays.asList("Quantity must be more than 0");
 
             assertThat(messages, is(expected));
