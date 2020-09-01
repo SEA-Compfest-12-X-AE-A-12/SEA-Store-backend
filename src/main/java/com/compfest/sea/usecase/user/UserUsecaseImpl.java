@@ -2,11 +2,18 @@ package com.compfest.sea.usecase.user;
 
 import com.compfest.sea.entities.user.User;
 import com.compfest.sea.repository.user.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("UserUsecaseImpl")
 public class UserUsecaseImpl implements UserUsecase {
     private UserDAO userDAO;
+
+    @Autowired
+    public UserUsecaseImpl(@Qualifier("UserDAOList") UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     public User findUserById(int id) {
