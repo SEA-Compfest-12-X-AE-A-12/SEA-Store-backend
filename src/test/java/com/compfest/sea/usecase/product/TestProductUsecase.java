@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class TestProductUsecase {
 
     @Mock
-    private static final ProductDAO productDAO = mock(ProductDAOList.class);
+    private static ProductDAO productDAO = mock(ProductDAOList.class);
     ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO);
 
 
