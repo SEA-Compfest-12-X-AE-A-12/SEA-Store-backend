@@ -16,13 +16,16 @@ public class User {
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
     private String phone;
+    private String address;
     private Role role;
 
-    public User(String name, String email, String password, String phone, Role role) {
+    public User(String name, String email, String password, String phone, String address,
+            Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.address = address;
         this.role = role;
     }
 }
