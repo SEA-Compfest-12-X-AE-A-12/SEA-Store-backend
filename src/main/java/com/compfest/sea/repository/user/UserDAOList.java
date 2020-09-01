@@ -10,6 +10,10 @@ import java.util.List;
 public class UserDAOList implements UserDAO {
     private static final List<User> DB = new ArrayList<>();
 
+    public List<User> getAllUser() {
+        return DB;
+    }
+
     @Override
     public User insert(User newUser) {
         DB.add(newUser);
