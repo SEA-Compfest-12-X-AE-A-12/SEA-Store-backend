@@ -1,6 +1,6 @@
 package com.compfest.sea.repository.user;
 
-import com.compfest.sea.entities.user.User;
+import com.compfest.sea.entity.user.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

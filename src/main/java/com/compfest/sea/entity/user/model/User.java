@@ -1,4 +1,4 @@
-package com.compfest.sea.entities.user;
+package com.compfest.sea.entity.user.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;

@@ -1,7 +1,7 @@
 package com.compfest.sea.repository.user;
 
 import java.util.List;
-import com.compfest.sea.entities.user.User;
+import com.compfest.sea.entity.user.model.User;
 
 public interface UserDAO {
     public List<User> getAllUser();

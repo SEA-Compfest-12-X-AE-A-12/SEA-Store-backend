@@ -1,7 +1,7 @@
 package com.compfest.sea.delivery.user;
 
 import java.util.List;
-import com.compfest.sea.entities.user.User;
+import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.usecase.user.UserUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

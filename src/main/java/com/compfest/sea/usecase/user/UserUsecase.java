@@ -1,7 +1,7 @@
 package com.compfest.sea.usecase.user;
 
 import java.util.List;
-import com.compfest.sea.entities.user.User;
+import com.compfest.sea.entity.user.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
