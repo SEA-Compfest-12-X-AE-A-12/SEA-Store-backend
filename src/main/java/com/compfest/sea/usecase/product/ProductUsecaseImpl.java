@@ -3,6 +3,7 @@ package com.compfest.sea.usecase.product;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.repository.product.ProductDAO;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,15 @@ public class ProductUsecaseImpl implements ProductUsecase {
             messages.add(String.valueOf(e));
         }
         return messages;
+    }
+
+    @Override
+    public List<Product> getAll() {
+        try{
+            return productDAO.getAll();
+        }catch(Exception e){
+            return new ArrayList<>();
+        }
     }
 
     public List<String> validateProduct(InsertRequestPayload insertRequestPayload){

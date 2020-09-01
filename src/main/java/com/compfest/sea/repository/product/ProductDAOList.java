@@ -1,6 +1,7 @@
 package com.compfest.sea.repository.product;
 
 import com.compfest.sea.entity.product.model.Product;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Repository("productRepoList")
 public class ProductDAOList implements ProductDAO{
-    List<Product> products = new ArrayList<>();
+    static final List<Product> products = new ArrayList<>();
 
     @Override
     public Integer insert(Product product) throws Exception{
@@ -17,4 +18,10 @@ public class ProductDAOList implements ProductDAO{
         products.add(product);
         return currId;
     }
+
+    @Override
+    public List<Product> getAll() throws Exception {
+        return products;
+    }
+
 }
