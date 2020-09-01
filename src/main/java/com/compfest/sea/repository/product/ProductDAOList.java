@@ -24,4 +24,9 @@ public class ProductDAOList implements ProductDAO{
         return products;
     }
 
+    @Override
+    public Product get(Integer id) throws Exception {
+        return products.stream().filter(product -> product.getId().equals(id)).findAny().orElse(null);
+    }
+
 }

@@ -11,4 +11,5 @@ import java.util.List;
 public interface ProductDelivery {
     public ResponsePayload insert(InsertRequestPayload insertRequestPayload);
     public List<Product>  getAll();
+    Product get(Integer id);
 }

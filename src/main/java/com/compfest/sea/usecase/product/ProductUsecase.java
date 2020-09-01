@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductUsecase {
     List<String> insert(InsertRequestPayload insertRequestPayload);
     List<Product> getAll();
+    Product get(Integer id);
 }

@@ -34,4 +34,10 @@ public class ProductDeliveryHttp implements ProductDelivery {
     public List<Product> getAll() {
         return productUsecase.getAll();
     }
+
+    @Override
+    @GetMapping("/{id}")
+    public Product get(@PathVariable Integer id) {
+        return productUsecase.get(id);
+    }
 }

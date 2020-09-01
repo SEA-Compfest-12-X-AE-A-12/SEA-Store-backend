@@ -7,5 +7,5 @@ import java.util.List;
 public interface ProductDAO {
     Integer insert(Product product) throws Exception;
     List<Product> getAll() throws Exception;
-
+    Product get(Integer id) throws Exception;
 }
