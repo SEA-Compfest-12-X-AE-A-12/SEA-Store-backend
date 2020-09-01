@@ -1,6 +1,6 @@
 package com.compfest.sea.repository.product;
 
-import com.compfest.sea.usecase.product.Product;
+import com.compfest.sea.entity.product.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

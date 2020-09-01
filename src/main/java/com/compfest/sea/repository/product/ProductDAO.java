@@ -1,8 +1,6 @@
 package com.compfest.sea.repository.product;
 
-import com.compfest.sea.usecase.product.Product;
-
-import java.util.List;
+import com.compfest.sea.entity.product.model.Product;
 
 public interface ProductDAO {
     Integer insert(Product product) throws Exception;

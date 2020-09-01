@@ -1,15 +1,14 @@
 package com.compfest.sea.usecase.product;
 
-import com.compfest.sea.delivery.product.payload.InsertProductPayload;
+import com.compfest.sea.entity.product.payload.InsertRequestPayload;
+import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.repository.product.ProductDAO;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static com.compfest.sea.usecase.product.Adapter.convertInsertPayloadToModel;
 
@@ -24,15 +23,15 @@ public class ProductUsecaseImpl implements ProductUsecase {
     }
 
     @Override
-    public List<String> insert(InsertProductPayload insertProductPayload) {
+    public List<String> insert(InsertRequestPayload insertRequestPayload) {
 
         List<String> messages = new ArrayList<>();
-        messages.addAll(validateProduct(insertProductPayload));
+        messages.addAll(validateProduct(insertRequestPayload));
         if(!messages.isEmpty()){
             return messages;
         }
         try{
-            Product product = convertInsertPayloadToModel(insertProductPayload);
+            Product product = convertInsertPayloadToModel(insertRequestPayload);
             productDAO.insert(product);
             messages.add("Success insert new product");
         }catch (Exception e){
@@ -41,9 +40,9 @@ public class ProductUsecaseImpl implements ProductUsecase {
         return messages;
     }
 
-    public List<String> validateProduct(InsertProductPayload insertProductPayload){
+    public List<String> validateProduct(InsertRequestPayload insertRequestPayload){
         List<String> messages = new ArrayList<>();
-        if(insertProductPayload.getQuantity() <= 0){
+        if(insertRequestPayload.getQuantity() <= 0){
             messages.add("Quantity must be more than 0");
         }
         return messages;

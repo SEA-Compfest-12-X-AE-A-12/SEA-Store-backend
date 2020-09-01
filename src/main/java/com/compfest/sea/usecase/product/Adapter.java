@@ -1,17 +1,18 @@
 package com.compfest.sea.usecase.product;
 
-import com.compfest.sea.delivery.product.payload.InsertProductPayload;
+import com.compfest.sea.entity.product.payload.InsertRequestPayload;
+import com.compfest.sea.entity.product.model.Product;
 
 public class Adapter {
-	public static Product convertInsertPayloadToModel(InsertProductPayload insertProductPayload) throws Exception{
+	public static Product convertInsertPayloadToModel(InsertRequestPayload insertRequestPayload) throws Exception{
 		return new Product(
 			0,
-			insertProductPayload.getQuantity(),
-			insertProductPayload.getMerchantId(),
-			insertProductPayload.getCategoryId(),
-			insertProductPayload.getName(),
-			insertProductPayload.getDescription(),
-			insertProductPayload.getPrice()
+			insertRequestPayload.getQuantity(),
+			insertRequestPayload.getMerchantId(),
+			insertRequestPayload.getCategoryId(),
+			insertRequestPayload.getName(),
+			insertRequestPayload.getDescription(),
+			insertRequestPayload.getPrice()
 		);
 	}
 }

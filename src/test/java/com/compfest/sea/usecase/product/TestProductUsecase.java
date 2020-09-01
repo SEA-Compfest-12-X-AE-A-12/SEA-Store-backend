@@ -1,6 +1,7 @@
 package com.compfest.sea.usecase.product;
 
-import com.compfest.sea.delivery.product.payload.InsertProductPayload;
+import com.compfest.sea.entity.product.payload.InsertRequestPayload;
+import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.repository.product.ProductDAO;
 import com.compfest.sea.repository.product.ProductDAOList;
 import org.junit.Before;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class TestProductUsecase {
 
     @Mock
-    private static ProductDAO productDAO = mock(ProductDAOList.class);
+    private static final ProductDAO productDAO = mock(ProductDAOList.class);
     ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO);
 
 
@@ -41,7 +42,7 @@ public class TestProductUsecase {
 
     @Test
     public void insertValidProduct(){
-        InsertProductPayload validProductPayload = new InsertProductPayload(
+        InsertRequestPayload validProductPayload = new InsertRequestPayload(
           10, 1, "p1", "prod1", 1, 10000
         );
         try {
@@ -58,7 +59,7 @@ public class TestProductUsecase {
 
     @Test
     public void insertInvalidProduct(){
-        InsertProductPayload invalidProductPayload = new InsertProductPayload(
+        InsertRequestPayload invalidProductPayload = new InsertRequestPayload(
           -10, 1, "p1", "prod1", 1, 10000
         );
         try {
