@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.user.UserDAO;
 import org.junit.Test;
@@ -26,11 +27,6 @@ public class TestUserUsecase {
     @InjectMocks
     UserUsecaseImpl usecase;
 
-    @BeforeEach
-    void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
     public void whenSaveUserItShouldReturnUser() {
         User user = new User();
@@ -47,10 +43,36 @@ public class TestUserUsecase {
     public void whenGetAllUserItShouldReturnAList() {
         List<User> createdUsers = new ArrayList<User>(Arrays.asList(new User(), new User()));
 
-        when(userDAO.getAllUser()).thenReturn(createdUsers);
+        when(userDAO.findAll()).thenReturn(createdUsers);
         List<User> users = usecase.getAllUser();
 
-        verify(userDAO).getAllUser();
+        verify(userDAO).findAll();
         assertThat(users.size(), is(2));
+    }
+
+    @Test
+    public void whenGetUserByIdItShouldReturnAUser() {
+        User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
+        when(userDAO.findUserById(2)).thenReturn(user);
+        User user2 = usecase.findUserById(2);
+        verify(userDAO).findUserById(2);
+        assertThat(user2.getName(), is(user.getName()));
+    }
+
+    @Test
+    public void whenDeleteUserItShouldNotReturnAnything() {
+        usecase.deleteUser(2);
+        verify(userDAO).deleteUser(2);
+    }
+
+    @Test
+    public void whenUpdateUserItShouldReturnAUser() {
+        User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
+        when(userDAO.updateUser(user.getId(), user)).thenReturn(user);
+
+        User updatedUser = usecase.updateProfile(user.getId(), user);
+        verify(userDAO).updateUser(user.getId(), user);
+
+        assertThat(updatedUser.getName(), is(user.getName()));
     }
 }
