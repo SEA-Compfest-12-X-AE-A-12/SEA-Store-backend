@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @EnableAutoConfiguration
 @RestController
-@RequestMapping("/api/v1/sea/product")
+@RequestMapping("/api/v1/sea/products")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductDeliveryHttp implements ProductDelivery {
     private final ProductUsecase productUsecase;
@@ -27,5 +27,10 @@ public class ProductDeliveryHttp implements ProductDelivery {
     @PostMapping("/insert")
     public ResponsePayload insert(InsertRequestPayload insertRequestPayload) {
         return new ResponsePayload(productUsecase.insert(insertRequestPayload));
+    }
+
+    @Override
+    public ResponsePayload update(InsertRequestPayload insertRequestPayload) {
+        return null;
     }
 }

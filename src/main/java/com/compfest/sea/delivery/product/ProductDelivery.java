@@ -7,4 +7,5 @@ import org.springframework.web.bind.annotation.*;
 
 public interface ProductDelivery {
     public ResponsePayload insert(@RequestBody InsertRequestPayload insertRequestPayload);
+    public ResponsePayload update(@RequestBody InsertRequestPayload insertRequestPayload);
 }

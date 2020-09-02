@@ -43,7 +43,7 @@ public class TestProductUsecase {
     @Test
     public void insertValidProduct(){
         InsertRequestPayload validProductPayload = new InsertRequestPayload(
-          10, 1, "p1", "prod1", 1, 10000
+          10, 1, 1, "p1", "prod1", 10000
         );
         try {
             Product product = Adapter.convertInsertPayloadToModel(validProductPayload);
@@ -60,7 +60,7 @@ public class TestProductUsecase {
     @Test
     public void insertInvalidProduct(){
         InsertRequestPayload invalidProductPayload = new InsertRequestPayload(
-          -10, 1, "p1", "prod1", 1, 10000
+          -10, 1, 1, "p1", "prod1", 10000
         );
         try {
             Product product = Adapter.convertInsertPayloadToModel(invalidProductPayload);
