@@ -18,17 +18,17 @@ public class UserUsecaseImpl implements UserUsecase {
 
     @Override
     public List<User> getAllUser() {
-        return userDAO.getAllUser();
+        return userDAO.findAll();
     }
 
     @Override
     public User findUserById(int id) {
-        return userDAO.getUserById(id);
+        return userDAO.findUserById(id);
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return userDAO.getUserByEmail(email);
+        return userDAO.findUserByEmail(email);
     }
 
     @Override

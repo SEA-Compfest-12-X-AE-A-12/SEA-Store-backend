@@ -10,7 +10,7 @@ import java.util.List;
 public class UserDAOList implements UserDAO {
     private static final List<User> DB = new ArrayList<>();
 
-    public List<User> getAllUser() {
+    public List<User> findAll() {
         return DB;
     }
 
@@ -21,12 +21,12 @@ public class UserDAOList implements UserDAO {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User findUserById(int id) {
         return DB.stream().filter(user -> id == user.getId()).findAny().orElse(null);
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public User findUserByEmail(String email) {
         return DB.stream().filter(user -> email.equals(user.getEmail())).findAny().orElse(null);
     }
 

@@ -4,13 +4,13 @@ import java.util.List;
 import com.compfest.sea.entity.user.model.User;
 
 public interface UserDAO {
-    public List<User> getAllUser();
+    public List<User> findAll();
 
     public User insert(User newUser);
 
-    public User getUserById(int id);
+    public User findUserById(int id);
 
-    public User getUserByEmail(String email);
+    public User findUserByEmail(String email);
 
     public User updateUser(int id, User updatedUser);
 
