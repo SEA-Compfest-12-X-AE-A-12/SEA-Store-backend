@@ -65,7 +65,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
     }
 
     public List<String> verifyOwner(Product productUpdate){
-        Product product = new Product();
+        Product product = new Product(); // todo: waiting for merged PR of get product by id
         List<String> messages = new ArrayList<>();
         if(!product.getMerchantId().equals(productUpdate.getMerchantId())){
             messages.add("Failed, You cannot update someone else's product");

@@ -7,10 +7,7 @@ import com.compfest.sea.usecase.product.ProductUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @EnableAutoConfiguration
 @RestController
@@ -31,6 +28,7 @@ public class ProductDeliveryHttp implements ProductDelivery {
     }
 
     @Override
+    @PutMapping("/")
     public ResponsePayload update(Product updateRequestPayload) {
         return new ResponsePayload(productUsecase.update(updateRequestPayload));
     }
