@@ -2,6 +2,7 @@ package com.compfest.sea.delivery.user;
 
 import java.util.List;
 import com.compfest.sea.entity.user.model.User;
+import com.compfest.sea.entity.user.payload.InsertUserRequestPayload;
 import com.compfest.sea.usecase.user.UserUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,8 +32,9 @@ public class UserDelivery {
     }
 
     @PostMapping
-    public User register(@RequestBody User user) {
-        return userUsecase.createUser(user);
+    public User register(@RequestBody InsertUserRequestPayload payload) {
+        User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
+        return userUsecase.createUser(convertedFromPayload);
     }
 
     @GetMapping("{id}")
