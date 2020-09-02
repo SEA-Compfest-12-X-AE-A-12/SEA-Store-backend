@@ -36,7 +36,13 @@ public class ProductDeliveryHttp implements ProductDelivery {
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("/{merchantId}")
+    public List<Product> getAllByMerchantId(@PathVariable Integer merchantId) {
+        return productUsecase.getAllByMerchantId(merchantId);
+    }
+
+    @Override
+    @GetMapping("/detail/{id}")
     public Product get(@PathVariable Integer id) {
         return productUsecase.get(id);
     }

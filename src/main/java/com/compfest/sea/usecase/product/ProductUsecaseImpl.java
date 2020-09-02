@@ -50,6 +50,15 @@ public class ProductUsecaseImpl implements ProductUsecase {
     }
 
     @Override
+    public List<Product> getAllByMerchantId(Integer merchantId) {
+        try{
+            return productDAO.getAllByMerchantId(merchantId);
+        }catch(Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public Product get(Integer id) {
         try{
             return productDAO.get(id);

@@ -11,5 +11,6 @@ import java.util.List;
 public interface ProductDelivery {
     public ResponsePayload insert(InsertRequestPayload insertRequestPayload);
     public List<Product>  getAll();
+    public List<Product> getAllByMerchantId(Integer merchantId);
     Product get(Integer id);
 }

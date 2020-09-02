@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository("productRepoList")
 public class ProductDAOList implements ProductDAO{
@@ -21,6 +22,11 @@ public class ProductDAOList implements ProductDAO{
     @Override
     public List<Product> getAll() throws Exception {
         return products;
+    }
+
+    @Override
+    public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
+        return products.stream().filter(product -> product.getMerchantId().equals(merchantId)).collect(Collectors.toList());
     }
 
     @Override
