@@ -1,5 +1,6 @@
 package com.compfest.sea.delivery.product;
 
+import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.payload.ResponsePayload;
 import com.compfest.sea.usecase.product.ProductUsecase;
@@ -30,7 +31,7 @@ public class ProductDeliveryHttp implements ProductDelivery {
     }
 
     @Override
-    public ResponsePayload update(InsertRequestPayload insertRequestPayload) {
-        return null;
+    public ResponsePayload update(Product updateRequestPayload) {
+        return new ResponsePayload(productUsecase.update(updateRequestPayload));
     }
 }

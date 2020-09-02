@@ -73,4 +73,19 @@ public class TestProductUsecase {
             fail(String.valueOf(e));
         }
     }
+
+    @Test
+    public void updateValidOwnedProduct(){
+
+    }
+
+    @Test
+    public void updateInvalidOwnedProduct(){
+
+    }
+
+    @Test
+    public void updateNotOwnedProduct(){
+
+    }
 }

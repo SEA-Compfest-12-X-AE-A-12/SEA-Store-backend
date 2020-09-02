@@ -17,4 +17,11 @@ public class ProductDAOList implements ProductDAO{
         products.add(product);
         return currId;
     }
+
+    @Override
+    public Integer update(Product product) throws Exception {
+        products.removeIf(p -> p.getMerchantId().equals(product.getMerchantId()) && p.getId().equals(product.getId()));
+        products.add(product);
+        return 1;
+    }
 }
