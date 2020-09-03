@@ -1,6 +1,7 @@
 package com.compfest.sea.usecase.user;
 
 import com.compfest.sea.config.security.jwt.JwtUtils;
+import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.user.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class UserUsecaseImpl implements UserUsecase {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.encoder = encoder;
+        userDAO.insert(new User(1, "admin", "admin@mail.com", encoder.encode("admin123"), "123", "address", Role.ADMIN));
     }
 
     @Override

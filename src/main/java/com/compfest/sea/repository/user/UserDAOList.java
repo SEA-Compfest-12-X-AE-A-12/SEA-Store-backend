@@ -1,9 +1,6 @@
 package com.compfest.sea.repository.user;
 
-import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -13,10 +10,6 @@ import java.util.List;
 public class UserDAOList implements UserDAO {
 
     private static final List<User> DB = new ArrayList<>();
-
-    public UserDAOList(PasswordEncoder encoder) {
-        DB.add(new User(1, "admin", "admin@mail.com", encoder.encode("admin123"), "123", "address", Role.ADMIN));
-    }
 
     public List<User> findAll() {
         return DB;
