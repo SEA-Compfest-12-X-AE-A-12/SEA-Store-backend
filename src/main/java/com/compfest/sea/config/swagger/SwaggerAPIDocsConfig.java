@@ -16,7 +16,7 @@ public class SwaggerAPIDocsConfig {
 		return new Docket(DocumentationType.SWAGGER_2)
 			.select()
 			.apis(RequestHandlerSelectors.basePackage("com.compfest.sea.delivery"))
-			.paths(PathSelectors.ant("/api/v1/sea/**"))
+			.paths(PathSelectors.ant("/api/**"))
 			.build();
 	}
 }

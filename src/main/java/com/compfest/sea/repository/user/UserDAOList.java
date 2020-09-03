@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository("UserDAOList")
 public class UserDAOList implements UserDAO {
+
     private static final List<User> DB = new ArrayList<>();
 
     public List<User> findAll() {

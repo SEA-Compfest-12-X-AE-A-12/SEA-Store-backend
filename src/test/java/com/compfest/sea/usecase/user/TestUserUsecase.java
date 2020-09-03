@@ -2,11 +2,12 @@ package com.compfest.sea.usecase.user;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.user.UserDAO;
@@ -17,12 +18,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestUserUsecase {
 
     @Mock
     UserDAO userDAO;
+
+    @Mock
+    PasswordEncoder encoder;
 
     @InjectMocks
     UserUsecaseImpl usecase;
@@ -33,6 +38,7 @@ public class TestUserUsecase {
         user.setName("name");
 
         when(userDAO.insert(user)).thenReturn(user);
+        when(encoder.encode(user.getPassword())).thenReturn(user.getPassword());
         User created = usecase.createUser(user);
         verify(userDAO).insert(user);
 
