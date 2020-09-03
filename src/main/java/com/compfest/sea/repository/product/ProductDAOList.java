@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository("productRepoList")
 public class ProductDAOList implements ProductDAO{
-    List<Product> products = new ArrayList<>();
+    static final List<Product> products = new ArrayList<>();
 
     @Override
     public Integer insert(Product product) throws Exception{
@@ -17,4 +18,20 @@ public class ProductDAOList implements ProductDAO{
         products.add(product);
         return currId;
     }
+
+    @Override
+    public List<Product> getAll() throws Exception {
+        return products;
+    }
+
+    @Override
+    public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
+        return products.stream().filter(product -> product.getMerchantId().equals(merchantId)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Product get(Integer id) throws Exception {
+        return products.stream().filter(product -> product.getId().equals(id)).findAny().orElse(null);
+    }
+
 }

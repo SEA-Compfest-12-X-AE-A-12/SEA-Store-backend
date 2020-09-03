@@ -40,6 +40,33 @@ public class ProductUsecaseImpl implements ProductUsecase {
         return messages;
     }
 
+    @Override
+    public List<Product> getAll() {
+        try{
+            return productDAO.getAll();
+        }catch(Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Product> getAllByMerchantId(Integer merchantId) {
+        try{
+            return productDAO.getAllByMerchantId(merchantId);
+        }catch(Exception e){
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Product get(Integer id) {
+        try{
+            return productDAO.get(id);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public List<String> validateProduct(InsertRequestPayload insertRequestPayload){
         List<String> messages = new ArrayList<>();
         if(insertRequestPayload.getQuantity() <= 0){
