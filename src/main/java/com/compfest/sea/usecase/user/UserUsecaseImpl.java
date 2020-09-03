@@ -38,6 +38,7 @@ public class UserUsecaseImpl implements UserUsecase {
 
     @Override
     public User updateProfile(int id, User updatedUser) {
+        updatedUser.setId(id);
         return userDAO.updateUser(id, updatedUser);
     }
 
