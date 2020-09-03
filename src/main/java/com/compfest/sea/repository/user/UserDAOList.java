@@ -16,6 +16,7 @@ public class UserDAOList implements UserDAO {
 
     @Override
     public User insert(User newUser) {
+        newUser.setId(DB.size() + 1);
         DB.add(newUser);
         return newUser;
     }
