@@ -10,13 +10,16 @@ import java.util.List;
 public class UserDAOList implements UserDAO {
     private static final List<User> DB = new ArrayList<>();
 
+    private static int lastId = 0;
+
     public List<User> findAll() {
         return DB;
     }
 
     @Override
     public User insert(User newUser) {
-        newUser.setId(DB.size() + 1);
+        lastId++;
+        newUser.setId(lastId);
         DB.add(newUser);
         return newUser;
     }
