@@ -48,7 +48,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
             return messages;
         }
         try{
-            productDAO.insert(product);
+            productDAO.update(product);
             messages.add("Success Update Product "+product.getName());
         }catch (Exception e){
             messages.add("Failed, "+ e);
@@ -92,10 +92,16 @@ public class ProductUsecaseImpl implements ProductUsecase {
     }
 
     public List<String> verifyOwner(Product productUpdate){
-        Product product = new Product(); // todo: waiting for merged PR of get product by id
         List<String> messages = new ArrayList<>();
-        if(!product.getMerchantId().equals(productUpdate.getMerchantId())){
-            messages.add("Failed, You cannot update someone else's product");
+        try{
+            Product product = productDAO.get(productUpdate.getId());
+            if(product == null){
+                messages.add("Failed, no such product");
+            }else if(!product.getMerchantId().equals(productUpdate.getMerchantId())){
+                messages.add("Failed, You cannot update someone else's product");
+            }
+        }catch (Exception e){
+            messages.add("Failed, error: "+ e);
         }
         return messages;
     }
