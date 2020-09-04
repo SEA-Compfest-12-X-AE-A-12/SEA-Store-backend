@@ -11,12 +11,16 @@ public class UserDAOList implements UserDAO {
 
     private static final List<User> DB = new ArrayList<>();
 
+    private static int lastId = 0;
+
     public List<User> findAll() {
         return DB;
     }
 
     @Override
     public User insert(User newUser) {
+        lastId++;
+        newUser.setId(lastId);
         DB.add(newUser);
         return newUser;
     }
