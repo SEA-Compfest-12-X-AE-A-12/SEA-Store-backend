@@ -13,7 +13,7 @@ import java.util.List;
 
 @EnableAutoConfiguration
 @RestController
-@RequestMapping("/api/v1/sea/products")
+@RequestMapping("/api/v1/products")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductDeliveryHttp implements ProductDelivery {
     private final ProductUsecase productUsecase;
