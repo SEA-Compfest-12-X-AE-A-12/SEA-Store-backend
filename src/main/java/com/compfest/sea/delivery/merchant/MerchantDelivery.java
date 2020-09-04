@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/merchants")
+@RequestMapping("/api/v1/merchants")
 @RestController
 public class MerchantDelivery {
     private MerchantUsecase merchantUsecase;
