@@ -10,6 +10,19 @@ on:
     branches: [ master, testing ]
 
 jobs:
+
+  formatting:
+    runs-on: ubuntu-latest
+      name: Formatting code to Google Java Style
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "11"
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--skip-sorting-imports --replace"
+
   build:
 
     runs-on: ubuntu-latest
