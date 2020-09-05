@@ -29,7 +29,7 @@ public class Product {
     @Column(name="merchantId", nullable = false)
     private Integer merchantId;
     @Column(name="category")
-    private String category;
+    private Category category;
     @Column(name="active", columnDefinition = "boolean default true")
-    private Boolean active;
+    private Boolean active = true;
 }

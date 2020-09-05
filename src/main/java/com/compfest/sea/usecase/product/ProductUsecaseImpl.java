@@ -1,5 +1,6 @@
 package com.compfest.sea.usecase.product;
 
+import com.compfest.sea.entity.category.Category;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.repository.product.ProductDAO;
@@ -8,9 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static com.compfest.sea.usecase.product.Adapter.convertInsertPayloadToModel;
+import static com.compfest.sea.entity.product.Adapter.convertInsertPayloadToModel;
 
 @Service("productUsecase1")
 public class ProductUsecaseImpl implements ProductUsecase {
@@ -29,6 +31,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
             Product product = convertInsertPayloadToModel(insertRequestPayload);
             messages.addAll(validateProduct(product));
             if(!messages.isEmpty()){
+                if(!Category.isValidCategory(insertRequestPayload.getCategory())) messages.add("Invalid payload of category");
                 return messages;
             }
             productDAO.save(product);
@@ -84,15 +87,20 @@ public class ProductUsecaseImpl implements ProductUsecase {
 
     public List<String> validateProduct(Product product){
         List<String> messages = new ArrayList<>();
+        if(product == null){
+            return Arrays.asList("Failed, invalid payload");
+        }
         if(product.getQuantity() <= 0){
             messages.add("Failed, Quantity must be more than 0");
         }
+        messages.addAll(verifyMerchant(product));
         return messages;
     }
 
     public List<String> verifyOwner(Product productUpdate){
         List<String> messages = new ArrayList<>();
         try{
+            messages.addAll(verifyMerchant(productUpdate));
             Product product = productDAO.findById(productUpdate.getId()).orElse(null);
             if(product == null){
                 messages.add("Failed, no such product");
@@ -105,4 +113,10 @@ public class ProductUsecaseImpl implements ProductUsecase {
         return messages;
     }
 
+    public List<String> verifyMerchant(Product product){
+        if(false){// TODO: waiting for merchant domain
+            return Arrays.asList("Failed, Merchant Id is not found");
+        }
+        return new ArrayList<>();
+    }
 }

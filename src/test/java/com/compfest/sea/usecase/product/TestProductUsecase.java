@@ -1,6 +1,7 @@
 package com.compfest.sea.usecase.product;
 
 import com.compfest.sea.entity.category.Category;
+import com.compfest.sea.entity.product.Adapter;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.repository.product.ProductDAO;
@@ -29,7 +30,7 @@ public class TestProductUsecase {
     ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO);
     List<Product> mockDB = new ArrayList<>();
     static Product product1 = new Product(
-      0,"p1","prod1", 1000, 10, 1 , Category.SPORT.toString(),true
+      0,"p1","prod1", 1000, 10, 1 , Category.SPORT,true
     );
 
 
@@ -65,6 +66,23 @@ public class TestProductUsecase {
             Mockito.when(productDAO.save(product)).thenReturn(product);
             List<String> messages = productUsecase.insert(invalidProductPayload);
             List<String> expected = Arrays.asList("Failed, Quantity must be more than 0");
+
+            assertThat(messages, is(expected));
+        }catch(Exception e){
+            fail(String.valueOf(e));
+        }
+    }
+
+    @Test
+    public void insertInvalidCategoryProduct(){
+        InsertRequestPayload invalidProductPayload = new InsertRequestPayload(
+          10, 1,"p1", "prod1", "INVALID",10000
+        );
+        try {
+            Product product = Adapter.convertInsertPayloadToModel(invalidProductPayload);
+            Mockito.when(productDAO.save(product)).thenReturn(product);
+            List<String> messages = productUsecase.insert(invalidProductPayload);
+            List<String> expected = Arrays.asList("Failed, invalid payload", "Invalid payload of category");
 
             assertThat(messages, is(expected));
         }catch(Exception e){
