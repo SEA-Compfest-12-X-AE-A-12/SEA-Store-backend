@@ -1,11 +1,9 @@
 package com.compfest.sea.entity.product.model;
 
 import com.compfest.sea.entity.category.Category;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 

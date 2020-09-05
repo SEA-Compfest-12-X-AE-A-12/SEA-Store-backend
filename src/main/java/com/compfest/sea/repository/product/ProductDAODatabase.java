@@ -2,11 +2,9 @@ package com.compfest.sea.repository.product;
 
 import com.compfest.sea.entity.product.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityNotFoundException;
@@ -17,8 +15,10 @@ import java.util.Optional;
 public class ProductDAODatabase implements ProductDAO {
 
 	@Autowired
+	@Lazy
 	ProductDAOJPA productDAOJPA;
 	@Autowired
+	@Lazy
 	ProductDAOJPACustom productDAOJPACustom;
 
 	@Override
@@ -46,7 +46,7 @@ public class ProductDAODatabase implements ProductDAO {
 		Product currProduct = findById(product.getId()).orElse(null);
 		if(currProduct == null) throw new EntityNotFoundException();
 		currProduct = product;
-		save(currProduct); // save will check if exists then update else create new product
+		save(currProduct); // save will check if exists then update, else create new product
 		return 1;
 	}
 
@@ -55,7 +55,7 @@ public class ProductDAODatabase implements ProductDAO {
 		Product currProduct = findById(id).orElse(null);
 		if(currProduct == null) throw new EntityNotFoundException();
 		currProduct.setActive(false);
-		save(currProduct); // save will check if exists then update else create new product
+		save(currProduct); // save will check if exists then update, else create new product
 		return 1;
 	}
 
