@@ -7,12 +7,13 @@ public class Adapter {
 	public static Product convertInsertPayloadToModel(InsertRequestPayload insertRequestPayload) throws Exception{
 		return new Product(
 			0,
-			insertRequestPayload.getQuantity(),
-			insertRequestPayload.getMerchantId(),
-			insertRequestPayload.getCategoryId(),
 			insertRequestPayload.getName(),
 			insertRequestPayload.getDescription(),
-			insertRequestPayload.getPrice()
+			insertRequestPayload.getPrice(),
+			insertRequestPayload.getQuantity(),
+			insertRequestPayload.getMerchantId(),
+			insertRequestPayload.getCategory(),
+			true
 		);
 	}
 }
