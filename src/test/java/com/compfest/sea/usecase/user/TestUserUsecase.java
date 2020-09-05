@@ -21,62 +21,59 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RunWith(MockitoJUnitRunner.class)
 public class TestUserUsecase {
 
-    @Mock
-    UserDAO userDAO;
+  @Mock UserDAO userDAO;
 
-    @Mock
-    PasswordEncoder encoder;
+  @Mock PasswordEncoder encoder;
 
-    @InjectMocks
-    UserUsecaseImpl usecase;
+  @InjectMocks UserUsecaseImpl usecase;
 
-    @Test
-    public void whenSaveUserItShouldReturnUser() {
-        User user = new User();
-        user.setName("name");
+  @Test
+  public void whenSaveUserItShouldReturnUser() {
+    User user = new User();
+    user.setName("name");
 
-        when(userDAO.insert(user)).thenReturn(user);
-        when(encoder.encode(user.getPassword())).thenReturn(user.getPassword());
-        User created = usecase.createUser(user);
-        verify(userDAO).insert(user);
+    when(userDAO.insert(user)).thenReturn(user);
+    when(encoder.encode(user.getPassword())).thenReturn(user.getPassword());
+    User created = usecase.createUser(user);
+    verify(userDAO).insert(user);
 
-        assertThat(created.getName(), is(user.getName()));
-    }
+    assertThat(created.getName(), is(user.getName()));
+  }
 
-    @Test
-    public void whenGetAllUserItShouldReturnAList() {
-        List<User> createdUsers = new ArrayList<User>(Arrays.asList(new User(), new User()));
+  @Test
+  public void whenGetAllUserItShouldReturnAList() {
+    List<User> createdUsers = new ArrayList<User>(Arrays.asList(new User(), new User()));
 
-        when(userDAO.findAll()).thenReturn(createdUsers);
-        List<User> users = usecase.getAllUser();
+    when(userDAO.findAll()).thenReturn(createdUsers);
+    List<User> users = usecase.getAllUser();
 
-        verify(userDAO).findAll();
-        assertThat(users.size(), is(2));
-    }
+    verify(userDAO).findAll();
+    assertThat(users.size(), is(2));
+  }
 
-    @Test
-    public void whenGetUserByIdItShouldReturnAUser() {
-        User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
-        when(userDAO.findUserById(2)).thenReturn(user);
-        User user2 = usecase.findUserById(2);
-        verify(userDAO).findUserById(2);
-        assertThat(user2.getName(), is(user.getName()));
-    }
+  @Test
+  public void whenGetUserByIdItShouldReturnAUser() {
+    User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
+    when(userDAO.findUserById(2)).thenReturn(user);
+    User user2 = usecase.findUserById(2);
+    verify(userDAO).findUserById(2);
+    assertThat(user2.getName(), is(user.getName()));
+  }
 
-    @Test
-    public void whenDeleteUserItShouldNotReturnAnything() {
-        usecase.deleteUser(2);
-        verify(userDAO).deleteUser(2);
-    }
+  @Test
+  public void whenDeleteUserItShouldNotReturnAnything() {
+    usecase.deleteUser(2);
+    verify(userDAO).deleteUser(2);
+  }
 
-    @Test
-    public void whenUpdateUserItShouldReturnAUser() {
-        User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
-        when(userDAO.updateUser(user.getId(), user)).thenReturn(user);
+  @Test
+  public void whenUpdateUserItShouldReturnAUser() {
+    User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
+    when(userDAO.updateUser(user.getId(), user)).thenReturn(user);
 
-        User updatedUser = usecase.updateProfile(user.getId(), user);
-        verify(userDAO).updateUser(user.getId(), user);
+    User updatedUser = usecase.updateProfile(user.getId(), user);
+    verify(userDAO).updateUser(user.getId(), user);
 
-        assertThat(updatedUser.getName(), is(user.getName()));
-    }
+    assertThat(updatedUser.getName(), is(user.getName()));
+  }
 }

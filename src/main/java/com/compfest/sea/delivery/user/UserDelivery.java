@@ -21,41 +21,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserDelivery {
 
-    private UserUsecase userUsecase;
+  private final UserUsecase userUsecase;
 
-    @Autowired
-    public UserDelivery(@Qualifier("UserUsecaseImpl") UserUsecase usecase) {
-        userUsecase = usecase;
-    }
+  @Autowired
+  public UserDelivery(@Qualifier("UserUsecaseImpl") UserUsecase usecase) {
+    userUsecase = usecase;
+  }
 
-    @GetMapping
-    public List<User> getUser() {
-        return userUsecase.getAllUser();
-    }
+  @GetMapping
+  public List<User> getUser() {
+    return userUsecase.getAllUser();
+  }
 
-    @PostMapping
-    public User register(@RequestBody InsertUserRequestPayload payload) {
-        User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
-        return userUsecase.createUser(convertedFromPayload);
-    }
+  @PostMapping
+  public User register(@RequestBody InsertUserRequestPayload payload) {
+    User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
+    return userUsecase.createUser(convertedFromPayload);
+  }
 
-    @GetMapping("{id}")
-    public User getUserById(@PathVariable("id") int id) {
-        return userUsecase.findUserById(id);
-    }
+  @GetMapping("{id}")
+  public User getUserById(@PathVariable("id") int id) {
+    return userUsecase.findUserById(id);
+  }
 
-    @PutMapping("{id}")
-    public User updateProfile(@PathVariable("id") int id, @RequestBody User updatedUser) {
-        return userUsecase.updateProfile(id, updatedUser);
-    }
+  @PutMapping("{id}")
+  public User updateProfile(@PathVariable("id") int id, @RequestBody User updatedUser) {
+    return userUsecase.updateProfile(id, updatedUser);
+  }
 
-    @DeleteMapping("{id}")
-    public void deleteUser(@PathVariable("id") int id) {
-        userUsecase.deleteUser(id);
-    }
+  @DeleteMapping("{id}")
+  public void deleteUser(@PathVariable("id") int id) {
+    userUsecase.deleteUser(id);
+  }
 
-    @PostMapping("/login")
-    public LoginResponse authenticateUser(@RequestBody LoginRequestPayload payload) {
-        return new LoginResponse(userUsecase.authenticate(payload.getEmail(), payload.getPassword()));
-    }
+  @PostMapping("/login")
+  public LoginResponse authenticateUser(@RequestBody LoginRequestPayload payload) {
+    return new LoginResponse(userUsecase.authenticate(payload.getEmail(), payload.getPassword()));
+  }
 }

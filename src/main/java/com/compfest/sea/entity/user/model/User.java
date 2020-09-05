@@ -19,76 +19,73 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(	name = "users",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"email", "role"})
-        })
+@Table(
+    name = "users",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "role"})})
 public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    @NotBlank
-    @Size(max = 100)
-    private String name;
+  @NotBlank
+  @Size(max = 100)
+  private String name;
 
-    @NotBlank
-    @Size(max = 50)
-    @Email
-    private String email;
+  @NotBlank
+  @Size(max = 50)
+  @Email
+  private String email;
 
-    @NotBlank
-    @Size(max = 100)
-    @JsonProperty(access = Access.WRITE_ONLY)
-    private String password;
+  @NotBlank
+  @Size(max = 100)
+  @JsonProperty(access = Access.WRITE_ONLY)
+  private String password;
 
-    @Pattern(regexp="\\d+")
-    @Size(min = 10, max=15)
-    private String phone;
+  @Pattern(regexp = "\\d+")
+  @Size(min = 10, max = 15)
+  private String phone;
 
-    @Size(max = 100)
-    private String address;
+  @Size(max = 100)
+  private String address;
 
-    @NotBlank
-    private Role role;
+  @NotBlank private Role role;
 
-    public User(String name, String email, String password, String phone, String address,
-            Role role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.address = address;
-        this.role = role;
-    }
+  public User(String name, String email, String password, String phone, String address, Role role) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.phone = phone;
+    this.address = address;
+    this.role = role;
+  }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return null;
+  }
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
+  @Override
+  public String getUsername() {
+    return email;
+  }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 }

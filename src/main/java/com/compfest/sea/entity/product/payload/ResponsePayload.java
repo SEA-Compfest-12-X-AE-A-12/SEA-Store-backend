@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ResponsePayload {
-	List<String> messages;
+  List<String> messages;
 }
