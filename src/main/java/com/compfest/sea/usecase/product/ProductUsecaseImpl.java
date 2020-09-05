@@ -18,7 +18,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
     private final ProductDAO productDAO;
 
     @Autowired
-    public ProductUsecaseImpl(@Qualifier("productRepoList") ProductDAO productDAO) {
+    public ProductUsecaseImpl(@Qualifier("productRepoDB") ProductDAO productDAO) {
         this.productDAO = productDAO;
     }
 
