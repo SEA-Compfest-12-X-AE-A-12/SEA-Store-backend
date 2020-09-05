@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +21,6 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -100,22 +98,57 @@ public class TestProductUsecase {
 
     @Test
     public void updateValidOwnedProduct(){
+        try {
+            ProductDAO productDAO1 = mock(ProductDAOList.class);
+            ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+            when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(product1));
+            when(productDAO1.update(any(Product.class))).thenReturn(1);
+            List<String> messages = productUsecase1.update(product1);
+            List<String> expected = Arrays.asList("Success Update Product "+product1.getName());
 
+            assertThat(messages, is(expected));
+        }catch(Exception e){
+            fail(String.valueOf(e));
+        }
     }
 
     @Test
     public void updateInvalidOwnedProduct(){
+        try {
+            ProductDAO productDAO1 = mock(ProductDAOList.class);
+            ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+            when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(product1));
+            when(productDAO1.update(any(Product.class))).thenReturn(1);
+            product1.setQuantity(-10);
+            List<String> messages = productUsecase1.update(product1);
+            product1.setQuantity(10);
+            List<String> expected = Arrays.asList("Failed, Quantity must be more than 0");
 
+            assertThat(messages, is(expected));
+        }catch(Exception e){
+            fail(String.valueOf(e));
+        }
     }
 
     @Test
     public void updateNonExistedProduct(){
+        try {
+            ProductDAO productDAO1 = mock(ProductDAOList.class);
+            ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+            when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(null));
+            when(productDAO1.update(any(Product.class))).thenReturn(1);
+            List<String> messages = productUsecase1.update(product1);
+            List<String> expected = Arrays.asList("Failed, no such product");
 
+            assertThat(messages, is(expected));
+        }catch(Exception e){
+            fail(String.valueOf(e));
+        }
     }
 
     @Test
     public void updateNotOwnedProduct(){
-
+        //TODO: waiting for merchant domain
     }
 
     @Test
