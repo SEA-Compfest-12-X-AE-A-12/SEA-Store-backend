@@ -24,10 +24,8 @@ jobs:
           args: "--skip-sorting-imports --replace"
 
   build:
-
     runs-on: ubuntu-latest
     name: Running tests and Building
-    
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
