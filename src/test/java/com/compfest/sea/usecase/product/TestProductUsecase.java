@@ -6,7 +6,6 @@ import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.repository.product.ProductDAO;
 import com.compfest.sea.repository.product.ProductDAOList;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -46,7 +45,7 @@ public class TestProductUsecase {
         );
         try {
             Product product = Adapter.convertInsertPayloadToModel(validProductPayload);
-            Mockito.when(productDAO.insert(product)).thenReturn(1);
+            Mockito.when(productDAO.save(product)).thenReturn(product);
             List<String> messages = productUsecase.insert(validProductPayload);
             List<String> expected = Arrays.asList("Success insert new product");
 
@@ -63,7 +62,7 @@ public class TestProductUsecase {
         );
         try {
             Product product = Adapter.convertInsertPayloadToModel(invalidProductPayload);
-            Mockito.when(productDAO.insert(product)).thenReturn(1);
+            Mockito.when(productDAO.save(product)).thenReturn(product);
             List<String> messages = productUsecase.insert(invalidProductPayload);
             List<String> expected = Arrays.asList("Failed, Quantity must be more than 0");
 

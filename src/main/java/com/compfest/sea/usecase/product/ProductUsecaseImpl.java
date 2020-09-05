@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
             if(!messages.isEmpty()){
                 return messages;
             }
-            productDAO.insert(product);
+            productDAO.save(product);
             messages.add("Success insert new product");
         }catch (Exception e){
             messages.add("Failed, "+ e);
@@ -59,7 +58,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
     @Override
     public List<Product> getAll() {
         try{
-            return productDAO.getAll();
+            return productDAO.findAll();
         }catch(Exception e){
             return new ArrayList<>();
         }
@@ -77,7 +76,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
     @Override
     public Product get(Integer id) {
         try{
-            return productDAO.get(id);
+            return productDAO.findById(id).orElse(null);
         }catch (Exception e){
             return null;
         }
@@ -94,7 +93,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
     public List<String> verifyOwner(Product productUpdate){
         List<String> messages = new ArrayList<>();
         try{
-            Product product = productDAO.get(productUpdate.getId());
+            Product product = productDAO.findById(productUpdate.getId()).orElse(null);
             if(product == null){
                 messages.add("Failed, no such product");
             }else if(!product.getMerchantId().equals(productUpdate.getMerchantId())){

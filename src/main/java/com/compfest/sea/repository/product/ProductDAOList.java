@@ -1,22 +1,26 @@
 package com.compfest.sea.repository.product;
 
 import com.compfest.sea.entity.product.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository("productRepoList")
-public class ProductDAOList implements ProductDAO{
+public class ProductDAOList implements ProductDAO {
     static final List<Product> products = new ArrayList<>();
 
     @Override
-    public Integer insert(Product product) throws Exception{
+    public Product save(Product product) {
         int currId = products.size();
         product.setId(currId);
         products.add(product);
-        return currId;
+        return product;
     }
 
     @Override
@@ -26,18 +30,27 @@ public class ProductDAOList implements ProductDAO{
         return 1;
     }
 
-    public List<Product> getAll() throws Exception {
-        return products;
-    }
-
     @Override
     public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
         return products.stream().filter(product -> product.getMerchantId().equals(merchantId)).collect(Collectors.toList());
     }
 
     @Override
-    public Product get(Integer id) throws Exception {
-        return products.stream().filter(product -> product.getId().equals(id)).findAny().orElse(null);
+    public Optional<Product> findById(Integer id) {
+        return products.stream().filter(product -> product.getId().equals(id)).findAny();
     }
+
+    @Override
+    public List<Product> findAll() {
+        return products;
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), products.size());
+        return new PageImpl<>(products.subList(start,end),pageable, products.size());
+    }
+
 
 }
