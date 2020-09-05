@@ -59,6 +59,17 @@ public class ProductUsecaseImpl implements ProductUsecase {
     }
 
     @Override
+    public List<String> delete(Integer id) {
+        try {
+            if(!productDAO.findById(id).isPresent()) return Arrays.asList("Failed, product id "+id+" not found");
+            productDAO.delete(id);
+            return Arrays.asList("Success delete product "+id);
+        }catch (Exception e){
+            return Arrays.asList("Failed, Error: "+ e);
+        }
+    }
+
+    @Override
     public List<Product> getAll() {
         try{
             return productDAO.findAll();
@@ -115,7 +126,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
 
     public List<String> verifyMerchant(Product product){
         if(false){// TODO: waiting for merchant domain
-            return Arrays.asList("Failed, Merchant Id is not found");
+            return Arrays.asList("Failed, Merchant Id "+product.getMerchantId()+"is not found");
         }
         return new ArrayList<>();
     }

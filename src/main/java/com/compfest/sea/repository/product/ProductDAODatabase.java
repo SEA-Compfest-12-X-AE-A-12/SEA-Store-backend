@@ -51,6 +51,15 @@ public class ProductDAODatabase implements ProductDAO {
 	}
 
 	@Override
+	public Integer delete(Integer id) throws Exception {
+		Product currProduct = findById(id).orElse(null);
+		if(currProduct == null) throw new EntityNotFoundException();
+		currProduct.setActive(false);
+		save(currProduct); // save will check if exists then update else create new product
+		return 1;
+	}
+
+	@Override
 	public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
 		return productDAOJPACustom.findAllByMerchantId(merchantId);
 	}

@@ -31,6 +31,12 @@ public class ProductDAOList implements ProductDAO {
     }
 
     @Override
+    public Integer delete(Integer id) throws Exception {
+        products.removeIf(p -> p.getId().equals(id));
+        return 1;
+    }
+
+    @Override
     public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
         return products.stream().filter(product -> product.getMerchantId().equals(merchantId)).collect(Collectors.toList());
     }

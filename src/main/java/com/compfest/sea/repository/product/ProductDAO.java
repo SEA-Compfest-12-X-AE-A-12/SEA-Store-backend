@@ -13,5 +13,6 @@ public interface ProductDAO {
     public List<Product> findAll();
     public Page<Product> findAll(Pageable pageable);
     Integer update(Product product) throws Exception;
+    Integer delete(Integer id) throws Exception;
     List<Product> getAllByMerchantId(Integer merchantId) throws Exception;
 }

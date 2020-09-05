@@ -35,6 +35,12 @@ public class ProductDeliveryHttp implements ProductDelivery {
         return new ResponsePayload(productUsecase.update(updateRequestPayload));
     }
 
+    @Override
+    @DeleteMapping("/delete/{id}")
+    public ResponsePayload delete(@PathVariable("id") Integer productId) {
+        return new ResponsePayload(productUsecase.delete(productId));
+    }
+
     @GetMapping("/")
     public List<Product> getAll() {
         return productUsecase.getAll();
