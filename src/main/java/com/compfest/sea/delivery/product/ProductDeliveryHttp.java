@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/products")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ProductDeliveryHttp implements ProductDelivery {
+public class  ProductDeliveryHttp implements ProductDelivery {
   private final ProductUsecase productUsecase;
 
   @Autowired
