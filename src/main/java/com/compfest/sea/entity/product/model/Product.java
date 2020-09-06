@@ -1,6 +1,7 @@
 package com.compfest.sea.entity.product.model;
 
 import com.compfest.sea.entity.category.Category;
+import com.compfest.sea.entity.merchant.model.Merchant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +30,10 @@ public class Product {
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
 
-  @Column(name = "merchantId", nullable = false)
-  private Integer merchantId;
+  @ManyToOne
+  @JoinColumn(name="merchant_id")
+  private Merchant merchant;
+
 
   @Column(name = "category")
   private Category category;

@@ -29,7 +29,7 @@ public class TestProductUsecase {
 
   @Mock private final ProductDAO productDAO = mock(ProductDAOList.class);
 
-  @InjectMocks ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO);
+  @InjectMocks ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO, merchantDAO);
 
   List<Product> mockDB = new ArrayList<>();
   static Product product1 = new Product(0, "p1", "prod1", 1000, 10, 1, Category.SPORT, true);
@@ -92,7 +92,7 @@ public class TestProductUsecase {
   public void updateValidOwnedProduct() {
     try {
       ProductDAO productDAO1 = mock(ProductDAOList.class);
-      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, merchantDAO);
       when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(product1));
       when(productDAO1.update(any(Product.class))).thenReturn(1);
       List<String> messages = productUsecase1.update(product1);
@@ -108,7 +108,7 @@ public class TestProductUsecase {
   public void updateInvalidOwnedProduct() {
     try {
       ProductDAO productDAO1 = mock(ProductDAOList.class);
-      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, merchantDAO);
       when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(product1));
       when(productDAO1.update(any(Product.class))).thenReturn(1);
       product1.setQuantity(-10);
@@ -126,7 +126,7 @@ public class TestProductUsecase {
   public void updateNonExistedProduct() {
     try {
       ProductDAO productDAO1 = mock(ProductDAOList.class);
-      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, merchantDAO);
       when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(null));
       when(productDAO1.update(any(Product.class))).thenReturn(1);
       List<String> messages = productUsecase1.update(product1);
@@ -147,7 +147,7 @@ public class TestProductUsecase {
   public void deleteValidProduct() {
     try {
       ProductDAO productDAO1 = mock(ProductDAOList.class);
-      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1);
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, merchantDAO);
       when(productDAO1.findById(anyInt())).thenReturn(java.util.Optional.ofNullable(product1));
       when(productDAO1.delete(anyInt())).thenReturn(1);
       List<String> messages = productUsecase1.delete(product1.getId());
