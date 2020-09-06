@@ -15,18 +15,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/categories")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class CategoryDeliveryHttp implements CategoryDelivery{
+public class CategoryDeliveryHttp implements CategoryDelivery {
 
-    private final CategoryUsecase categoryUsecase;
+  private final CategoryUsecase categoryUsecase;
 
-    @Autowired
-    public CategoryDeliveryHttp(@Qualifier("categoryUsecase1") CategoryUsecase categoryUsecase) {
-        this.categoryUsecase = categoryUsecase;
-    }
+  @Autowired
+  public CategoryDeliveryHttp(@Qualifier("categoryUsecase1") CategoryUsecase categoryUsecase) {
+    this.categoryUsecase = categoryUsecase;
+  }
 
-    @Override
-    @GetMapping("/")
-    public List<String> getAll() {
-        return categoryUsecase.getAll();
-    }
+  @Override
+  @GetMapping("/")
+  public List<String> getAll() {
+    return categoryUsecase.getAll();
+  }
 }

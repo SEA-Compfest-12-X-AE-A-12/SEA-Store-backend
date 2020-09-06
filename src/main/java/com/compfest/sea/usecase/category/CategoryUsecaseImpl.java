@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 
 @Service("categoryUsecase1")
 public class CategoryUsecaseImpl implements CategoryUsecase {
-    @Override
-    public List<String> getAll() {
-        return Stream.of(Category.values()).map(Enum::name).collect(Collectors.toList());
-    }
+  @Override
+  public List<String> getAll() {
+    return Stream.of(Category.values()).map(Enum::name).collect(Collectors.toList());
+  }
 }

@@ -5,5 +5,5 @@ import com.compfest.sea.entity.category.Category;
 import java.util.List;
 
 public interface CategoryDelivery {
-    List<String> getAll();
+  List<String> getAll();
 }
