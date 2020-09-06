@@ -14,24 +14,23 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="merchants")
+@Table(name = "merchants")
 public class Merchant {
-    @Id
-    private int userID;
-    @OneToOne
-    @MapsId
-    private User user;
-    private String description;
-    private boolean isVerified;
-    private int balance;
-    @OneToMany(mappedBy = "merchant")
-    private List<Proposal> proposals;
-    @OneToMany(mappedBy = "merchant")
-    private List<Product> products;
+  @Id private int userID;
+  @OneToOne @MapsId private User user;
+  private String description;
+  private boolean isVerified;
+  private int balance;
 
-    public Merchant(String description, boolean isVerified, int balance) {
-        this.description = description;
-        this.isVerified = isVerified;
-        this.balance = balance;
-    }
+  @OneToMany(mappedBy = "merchant")
+  private List<Proposal> proposals;
+
+  @OneToMany(mappedBy = "merchant")
+  private List<Product> products;
+
+  public Merchant(String description, boolean isVerified, int balance) {
+    this.description = description;
+    this.isVerified = isVerified;
+    this.balance = balance;
+  }
 }

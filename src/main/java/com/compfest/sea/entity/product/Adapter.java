@@ -6,7 +6,8 @@ import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
 
 public class Adapter {
-  public static Product convertInsertPayloadToModel(InsertRequestPayload insertRequestPayload, Merchant merchant) {
+  public static Product convertInsertPayloadToModel(
+      InsertRequestPayload insertRequestPayload, Merchant merchant) {
     try {
       return new Product(
           0,

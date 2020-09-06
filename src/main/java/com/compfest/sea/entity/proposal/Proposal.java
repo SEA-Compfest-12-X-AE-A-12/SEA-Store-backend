@@ -15,20 +15,23 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "proposals")
 public class Proposal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-    private Integer reviewedByAdminId;
-    @NotBlank
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="merchant_id")
-    private Merchant merchant;
-    private String description;
-    private Category merchantCategory;
-    private String vision;
-    private String mission;
-    private String motivation;
-    @Column(columnDefinition = "varchar(255) default 'ON_REVIEW'")
-    private ProposalStatus proposalStatus;
+  private Integer reviewedByAdminId;
+
+  @NotBlank
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "merchant_id")
+  private Merchant merchant;
+
+  private String description;
+  private Category merchantCategory;
+  private String vision;
+  private String mission;
+  private String motivation;
+
+  @Column(columnDefinition = "varchar(255) default 'ON_REVIEW'")
+  private ProposalStatus proposalStatus;
 }

@@ -31,9 +31,8 @@ public class Product {
   private Integer quantity;
 
   @ManyToOne
-  @JoinColumn(name="merchant_id")
+  @JoinColumn(name = "merchant_id")
   private Merchant merchant;
-
 
   @Column(name = "category")
   private Category category;
