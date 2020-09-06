@@ -15,6 +15,5 @@ public class InsertMerchantRequest {
     private String password;
     private String phone;
     private String address;
-    private Role role;
     private String description;
 }
