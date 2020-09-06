@@ -24,4 +24,12 @@ public class APIExceptionHandler {
                 request.getDescription(false));
         return new ResponseEntity<>(details, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(value = {NotAuthorizedException.class})
+    public ResponseEntity<Object> handleNotAuthorized(NotAuthorizedException ex,
+            WebRequest request) {
+        ErrorDetails details =
+                new ErrorDetails(new Date(), "user not authorized", request.getDescription(false));
+        return new ResponseEntity<>(details, HttpStatus.CONFLICT);
+    }
 }
