@@ -38,7 +38,8 @@ public class UserDelivery {
     @PostMapping
     public User register(@RequestBody InsertUserRequestPayload payload) {
         User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
-        User user = userUsecase.findUserByEmail(convertedFromPayload.getEmail());
+        User user = userUsecase.findUserWithRoleByEmail(convertedFromPayload.getEmail(),
+                convertedFromPayload.getRole());
         if (user != null) {
             throw new ResourceAlreadyExistException("user");
         }

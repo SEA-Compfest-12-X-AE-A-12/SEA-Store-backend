@@ -25,13 +25,15 @@ public class UserUsecaseImpl implements UserUsecase {
     private PasswordEncoder encoder;
 
     @Autowired
-    public UserUsecaseImpl(@Qualifier("UserDAOList") UserDAO userDAO, AuthenticationManager authenticationManager,
-                           JwtUtils jwtUtils, PasswordEncoder encoder) {
+    public UserUsecaseImpl(@Qualifier("UserDAOList") UserDAO userDAO,
+            AuthenticationManager authenticationManager, JwtUtils jwtUtils,
+            PasswordEncoder encoder) {
         this.userDAO = userDAO;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.encoder = encoder;
-        userDAO.insert(new User(1, "admin", "admin@mail.com", encoder.encode("admin123"), "123", "address", Role.ADMIN));
+        userDAO.insert(new User(1, "admin", "admin@mail.com", encoder.encode("admin123"), "123",
+                "address", Role.ADMIN));
     }
 
     @Override
@@ -44,10 +46,16 @@ public class UserUsecaseImpl implements UserUsecase {
         return userDAO.findUserById(id);
     }
 
-    @Override
-    public User findUserByEmail(String email) {
+    public List<User> findUserByEmail(String email) {
         return userDAO.findUserByEmail(email);
     }
+
+    @Override
+    public User findUserWithRoleByEmail(String email, Role role) {
+        List<User> users = findUserByEmail(email);
+        return users.stream().filter(user -> user.getRole().equals(role)).findAny().orElse(null);
+    }
+
 
     @Override
     public User createUser(User newUser) {
@@ -68,15 +76,15 @@ public class UserUsecaseImpl implements UserUsecase {
 
     @Override
     public String authenticate(String email, String password) {
-        Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password)
-        );
+        Authentication auth = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
         SecurityContextHolder.getContext().setAuthentication(auth);
         return jwtUtils.generateJwtToken(auth);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userDAO.findUserByEmail(email);
+        List<User> users = findUserByEmail(email);
+        return users.get(0);
     }
 }
