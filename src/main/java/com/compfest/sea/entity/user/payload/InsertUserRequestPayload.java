@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class InsertUserRequestPayload {
-    private String name;
-    private String email;
-    private String password;
-    private String phone;
-    private String address;
-    private Role role;
+  private String name;
+  private String email;
+  private String password;
+  private String phone;
+  private String address;
+  private Role role;
 }

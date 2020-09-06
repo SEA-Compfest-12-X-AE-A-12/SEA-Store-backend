@@ -1,14 +1,12 @@
 package com.compfest.sea.entity.product.payload;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
+@AllArgsConstructor
 public class ResponsePayload {
-	@Setter @Getter List<String> messages;
-
-	public ResponsePayload(List<String> messages) {
-		this.messages = messages;
-	}
+  List<String> messages;
 }

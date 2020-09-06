@@ -1,4 +1,5 @@
 package com.compfest.sea.config.security.jwt;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -14,12 +15,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
+  private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
-            throws IOException {
-        logger.error("Unauthorized error: {}", e.getMessage());
-        response.   sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
-    }
+  @Override
+  public void commence(
+      HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
+      throws IOException {
+    logger.error("Unauthorized error: {}", e.getMessage());
+    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+  }
 }
