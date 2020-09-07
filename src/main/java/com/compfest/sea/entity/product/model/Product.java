@@ -1,21 +1,40 @@
 package com.compfest.sea.entity.product.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.compfest.sea.entity.category.Category;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity
+@Table(name = "\"products\"")
 public class Product {
-    @Getter @Setter private Integer id, quantity, merchantId, categoryId;
-    @Getter @Setter private String name, description;
-    @Getter @Setter private Integer price;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-    public Product(Integer id, Integer quantity, Integer merchantId, Integer categoryId, String name, String description, Integer price) {
-        this.id = id;
-        this.quantity = quantity;
-        this.merchantId = merchantId;
-        this.categoryId = categoryId;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "description")
+  private String description;
+
+  @Column(name = "price")
+  private Integer price;
+
+  @Column(name = "quantity", nullable = false)
+  private Integer quantity;
+
+  @Column(name = "merchantId", nullable = false)
+  private Integer merchantId;
+
+  @Column(name = "category")
+  private Category category;
+
+  @Column(name = "active", columnDefinition = "boolean default true")
+  private Boolean active = true;
 }

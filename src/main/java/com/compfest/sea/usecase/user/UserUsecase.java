@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserUsecase extends UserDetailsService {
-    public List<User> getAllUser();
+  List<User> getAllUser();
 
-    public User findUserById(int id);
+  User findUserById(int id);
 
-    public User findUserWithRoleByEmail(String email, Role role);
+  public User findUserWithRoleByEmail(String email, Role role);
 
-    public User createUser(User newUser);
+  User createUser(User newUser);
 
-    public User updateProfile(int id, User updatedUser);
+  User updateProfile(int id, User updatedUser);
 
-    public void deleteUser(int id);
+  void deleteUser(int id);
 
-    public String authenticate(String email, String password);
+  String authenticate(String email, String password);
 }
