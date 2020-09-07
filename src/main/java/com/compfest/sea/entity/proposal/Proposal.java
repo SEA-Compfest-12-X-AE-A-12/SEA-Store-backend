@@ -23,7 +23,7 @@ public class Proposal {
 
   @NotBlank
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "merchant_id")
+  @JoinColumn(name = "merchant_id", referencedColumnName = "user_id")
   private Merchant merchant;
 
   private String description;

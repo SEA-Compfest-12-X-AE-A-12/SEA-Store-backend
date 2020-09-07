@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,7 @@ public class ProductDAODatabase implements ProductDAO {
 
   @Override
   public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
-    return productDAOJPACustom.findAllByMerchantId(merchantId);
+//    return productDAOJPACustom.findAllByMerchantId(merchantId);
+    return new LinkedList<>();
   }
 }

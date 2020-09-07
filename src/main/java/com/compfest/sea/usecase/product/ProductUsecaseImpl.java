@@ -4,8 +4,9 @@ import com.compfest.sea.entity.category.Category;
 import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
-import com.compfest.sea.repository.merchant.MerchantDAO;
+import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.product.ProductDAO;
+import com.compfest.sea.repository.user.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,28 +21,29 @@ import static com.compfest.sea.entity.product.Adapter.convertInsertPayloadToMode
 public class ProductUsecaseImpl implements ProductUsecase {
 
   private final ProductDAO productDAO;
-  private final MerchantDAO merchantDAO;
+  private final UserDAO userDAO;
 
   @Autowired
   public ProductUsecaseImpl(
-      @Qualifier("productRepoDB") ProductDAO productDAO,
-      @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
+    @Qualifier("productRepoDB") ProductDAO productDAO,
+    @Qualifier("UserUsecaseImpl") UserDAO userDAO) {
     this.productDAO = productDAO;
-    this.merchantDAO = merchantDAO;
+    this.userDAO = userDAO;
   }
 
   @Override
   public List<String> insert(InsertRequestPayload insertRequestPayload) {
     List<String> messages = new ArrayList<>();
+    User merchant = null;
     try {
-      messages.addAll(validateInsertRequestProduct(product));
+      merchant = validateInsertRequestProduct(messages,insertRequestPayload);
       if (!messages.isEmpty()) {
         if (!Category.isValidCategory(insertRequestPayload.getCategory())) {
           messages.add("Invalid payload of category");
         }
-        Product product = convertInsertPayloadToModel(insertRequestPayload);
         return messages;
       }
+      Product product = convertInsertPayloadToModel(insertRequestPayload, merchant);
       productDAO.save(product);
       messages.add("Success insert new product");
     } catch (Exception e) {
@@ -116,31 +118,30 @@ public class ProductUsecaseImpl implements ProductUsecase {
     return messages;
   }
 
-  public List<String> validateInsertRequestProduct(InsertRequestPayload insertRequestPayload) {
-    List<String> messages = new ArrayList<>();
-    Merchant merchant = merchantDAO.findByUserId(insertRequestPayload.getMerchantId());
+  public User validateInsertRequestProduct(List<String> messages, InsertRequestPayload insertRequestPayload) {
+    User merchant = userDAO.findUserById(insertRequestPayload.getMerchantId());
     if (merchant == null) {
       messages.add("Failed, Merchant Id " + insertRequestPayload.getMerchantId() + " not found");
     }
     Product product = convertInsertPayloadToModel(insertRequestPayload, merchant);
     messages.addAll(validateProduct(product));
-    return messages;
+    return merchant;
   }
 
   public List<String> verifyOwner(Product productUpdate) {
     List<String> messages = new ArrayList<>();
-    try {
-      Product product = productDAO.findById(productUpdate.getId()).orElse(null);
-      if (product == null) {
-        messages.add("Failed, no such product");
-      } else if (productUpdate.getMerchant() == null) {
-        messages.add("Failed, Merchant Id " + pro.getMerchantId() + " not found");
-      } else if (!(product.getMerchant().getUserID() == productUpdate.getMerchant().getUserID())) {
-        messages.add("Failed, You cannot update someone else's product");
-      }
-    } catch (Exception e) {
-      messages.add("Failed, error: " + e);
-    }
+//    try {
+//      Product product = productDAO.findById(productUpdate.getId()).orElse(null);
+//      if (product == null) {
+//        messages.add("Failed, no such product");
+//      } else if (productUpdate.getMerchant() == null) {
+//        messages.add("Failed, Merchant Id " + produc + " not found");
+//      } else if (!(product.getMerchant().getUserID() == productUpdate.getMerchant().getUserID())) {
+//        messages.add("Failed, You cannot update someone else's product");
+//      }
+//    } catch (Exception e) {
+//      messages.add("Failed, error: " + e);
+//    }
     return messages;
   }
 

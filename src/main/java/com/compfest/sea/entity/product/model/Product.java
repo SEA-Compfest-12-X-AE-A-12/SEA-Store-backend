@@ -2,6 +2,7 @@ package com.compfest.sea.entity.product.model;
 
 import com.compfest.sea.entity.category.Category;
 import com.compfest.sea.entity.merchant.model.Merchant;
+import com.compfest.sea.entity.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,7 @@ public class Product {
 
   @ManyToOne
   @JoinColumn(name = "merchant_id")
-  private Merchant merchant;
+  private User merchant;
 
   @Column(name = "category")
   private Category category;
