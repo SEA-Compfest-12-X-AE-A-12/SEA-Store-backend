@@ -94,9 +94,6 @@ public class TestProductUsecase {
       when(productDAO1.save(product)).thenReturn(product);
       when(userDAO1.findUserById(anyInt())).thenReturn(new User());
       ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, userDAO1);
-      //      Product product = convertInsertPayloadToModel(invalidProductPayload, merchant1);
-      //      when(productDAO.save(product)).thenReturn(product);
-      //      when(userDAO.findUserById(anyInt())).thenReturn(new User());
       List<String> messages = productUsecase1.insert(invalidProductPayload);
       List<String> expected =
           Arrays.asList("Failed, invalid payload", "Invalid payload of category");

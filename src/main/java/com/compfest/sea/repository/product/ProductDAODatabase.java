@@ -58,7 +58,6 @@ public class ProductDAODatabase implements ProductDAO {
 
   @Override
   public List<Product> getAllByMerchantId(Integer merchantId) throws Exception {
-    //    return productDAOJPACustom.findAllByMerchantId(merchantId);
-    return new LinkedList<>();
+      return productDAOJPACustom.findAllByMerchantId(merchantId);
   }
 }
