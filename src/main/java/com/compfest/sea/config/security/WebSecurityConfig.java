@@ -6,6 +6,7 @@ import com.compfest.sea.usecase.user.UserUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -66,6 +67,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/webjars/**",
             "/swagger-resources/**",
             "/v2/api-docs")
+        .permitAll()
+        .antMatchers(
+            HttpMethod.GET,
+            "/api/v1/categories/",
+            "/api/v1/products/",
+            "/api/v1/products/detail/{\\d+}",
+            "/api/v1/products/{\\d+}")
         .permitAll()
         .anyRequest()
         .authenticated();
