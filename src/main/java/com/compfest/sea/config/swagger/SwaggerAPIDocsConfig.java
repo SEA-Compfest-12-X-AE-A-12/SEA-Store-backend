@@ -11,12 +11,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerAPIDocsConfig {
-  @Bean
-  public Docket api() {
-    return new Docket(DocumentationType.SWAGGER_2)
-        .select()
-        .apis(RequestHandlerSelectors.basePackage("com.compfest.sea.delivery"))
-        .paths(PathSelectors.ant("/api/v1/sea/**"))
-        .build();
-  }
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2)
+			.select()
+			.apis(RequestHandlerSelectors.basePackage("com.compfest.sea.delivery"))
+			.paths(PathSelectors.ant("/api/v1/sea/**"))
+			.build();
+	}
 }
