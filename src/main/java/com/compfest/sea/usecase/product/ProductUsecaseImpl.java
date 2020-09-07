@@ -26,7 +26,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
   @Autowired
   public ProductUsecaseImpl(
     @Qualifier("productRepoDB") ProductDAO productDAO,
-    @Qualifier("UserUsecaseImpl") UserDAO userDAO) {
+    @Qualifier("UserDAOList") UserDAO userDAO) {
     this.productDAO = productDAO;
     this.userDAO = userDAO;
   }
@@ -130,18 +130,18 @@ public class ProductUsecaseImpl implements ProductUsecase {
 
   public List<String> verifyOwner(Product productUpdate) {
     List<String> messages = new ArrayList<>();
-//    try {
-//      Product product = productDAO.findById(productUpdate.getId()).orElse(null);
-//      if (product == null) {
-//        messages.add("Failed, no such product");
-//      } else if (productUpdate.getMerchant() == null) {
-//        messages.add("Failed, Merchant Id " + produc + " not found");
-//      } else if (!(product.getMerchant().getUserID() == productUpdate.getMerchant().getUserID())) {
-//        messages.add("Failed, You cannot update someone else's product");
-//      }
-//    } catch (Exception e) {
-//      messages.add("Failed, error: " + e);
-//    }
+    try {
+      Product product = productDAO.findById(productUpdate.getId()).orElse(null);
+      if (product == null) {
+        messages.add("Failed, no such product");
+      } else if (productUpdate.getMerchant() == null) {
+        messages.add("Failed, Merchant Id " + productUpdate.getMerchant().getId() + " not found");
+      } else if (!(product.getMerchant().getId() == productUpdate.getMerchant().getId())) {
+        messages.add("Failed, You cannot update someone else's product");
+      }
+    } catch (Exception e) {
+      messages.add("Failed, error: " + e);
+    }
     return messages;
   }
 

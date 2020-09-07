@@ -51,8 +51,12 @@ public class TestProductUsecase {
         new InsertRequestPayload(10, 1, "p1", "prod1", Category.SPORT.toString(), 10000);
     try {
       Product product = convertInsertPayloadToModel(validProductPayload, merchant1);
-      when(productDAO.save(product)).thenReturn(product);
-      List<String> messages = productUsecase.insert(validProductPayload);
+      ProductDAO productDAO1 = mock(ProductDAO.class);
+      UserDAO userDAO1 = mock(UserDAO.class);
+      when(productDAO1.save(product)).thenReturn(product);
+      when(userDAO1.findUserById(anyInt())).thenReturn(new User());
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, userDAO1);
+      List<String> messages = productUsecase1.insert(validProductPayload);
       List<String> expected = Arrays.asList("Success insert new product");
 
       assertThat(messages, is(expected));
@@ -67,8 +71,12 @@ public class TestProductUsecase {
         new InsertRequestPayload(-10, 1, "p1", "prod1", Category.SPORT.toString(), 10000);
     try {
       Product product = convertInsertPayloadToModel(invalidProductPayload, merchant1);
-      when(productDAO.save(product)).thenReturn(product);
-      List<String> messages = productUsecase.insert(invalidProductPayload);
+      ProductDAO productDAO1 = mock(ProductDAO.class);
+      UserDAO userDAO1 = mock(UserDAO.class);
+      when(productDAO1.save(product)).thenReturn(product);
+      when(userDAO1.findUserById(anyInt())).thenReturn(new User());
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, userDAO1);
+      List<String> messages = productUsecase1.insert(invalidProductPayload);
       List<String> expected = Arrays.asList("Failed, Quantity must be more than 0");
 
       assertThat(messages, is(expected));
@@ -83,8 +91,15 @@ public class TestProductUsecase {
         new InsertRequestPayload(10, 1, "p1", "prod1", "INVALID", 10000);
     try {
       Product product = convertInsertPayloadToModel(invalidProductPayload, merchant1);
-      when(productDAO.save(product)).thenReturn(product);
-      List<String> messages = productUsecase.insert(invalidProductPayload);
+      ProductDAO productDAO1 = mock(ProductDAO.class);
+      UserDAO userDAO1 = mock(UserDAO.class);
+      when(productDAO1.save(product)).thenReturn(product);
+      when(userDAO1.findUserById(anyInt())).thenReturn(new User());
+      ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, userDAO1);
+//      Product product = convertInsertPayloadToModel(invalidProductPayload, merchant1);
+//      when(productDAO.save(product)).thenReturn(product);
+//      when(userDAO.findUserById(anyInt())).thenReturn(new User());
+      List<String> messages = productUsecase1.insert(invalidProductPayload);
       List<String> expected =
           Arrays.asList("Failed, invalid payload", "Invalid payload of category");
 
