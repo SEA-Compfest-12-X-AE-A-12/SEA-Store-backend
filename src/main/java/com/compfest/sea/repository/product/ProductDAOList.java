@@ -26,9 +26,7 @@ public class ProductDAOList implements ProductDAO {
   @Override
   public Integer update(Product product) throws Exception {
     products.removeIf(
-        p ->
-            p.getId() == product.getMerchant().getId()
-            && p.getId().equals(product.getId()));
+        p -> p.getId() == product.getMerchant().getId() && p.getId().equals(product.getId()));
     products.add(product);
     return 1;
   }

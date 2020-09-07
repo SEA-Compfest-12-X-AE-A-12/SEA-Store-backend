@@ -16,7 +16,10 @@ import java.util.List;
 @Entity
 @Table(name = "merchants")
 public class Merchant {
-  @Id @Column(name = "user_id") private int userID;
+  @Id
+  @Column(name = "user_id")
+  private int userID;
+
   @OneToOne @MapsId private User user;
   private String description;
   private boolean isVerified;

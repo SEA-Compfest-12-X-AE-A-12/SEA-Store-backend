@@ -1,7 +1,6 @@
 package com.compfest.sea.usecase.product;
 
 import com.compfest.sea.entity.category.Category;
-import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.entity.user.model.User;
@@ -25,8 +24,8 @@ public class ProductUsecaseImpl implements ProductUsecase {
 
   @Autowired
   public ProductUsecaseImpl(
-    @Qualifier("productRepoDB") ProductDAO productDAO,
-    @Qualifier("UserDAOList") UserDAO userDAO) {
+      @Qualifier("productRepoDB") ProductDAO productDAO,
+      @Qualifier("UserDAOList") UserDAO userDAO) {
     this.productDAO = productDAO;
     this.userDAO = userDAO;
   }
@@ -36,7 +35,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
     List<String> messages = new ArrayList<>();
     User merchant = null;
     try {
-      merchant = validateInsertRequestProduct(messages,insertRequestPayload);
+      merchant = validateInsertRequestProduct(messages, insertRequestPayload);
       if (!messages.isEmpty()) {
         if (!Category.isValidCategory(insertRequestPayload.getCategory())) {
           messages.add("Invalid payload of category");
@@ -118,7 +117,8 @@ public class ProductUsecaseImpl implements ProductUsecase {
     return messages;
   }
 
-  public User validateInsertRequestProduct(List<String> messages, InsertRequestPayload insertRequestPayload) {
+  public User validateInsertRequestProduct(
+      List<String> messages, InsertRequestPayload insertRequestPayload) {
     User merchant = userDAO.findUserById(insertRequestPayload.getMerchantId());
     if (merchant == null) {
       messages.add("Failed, Merchant Id " + insertRequestPayload.getMerchantId() + " not found");

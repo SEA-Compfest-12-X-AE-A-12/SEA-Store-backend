@@ -1,7 +1,6 @@
 package com.compfest.sea.entity.product.model;
 
 import com.compfest.sea.entity.category.Category;
-import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;

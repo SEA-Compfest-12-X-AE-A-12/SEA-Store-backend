@@ -1,11 +1,9 @@
 package com.compfest.sea.usecase.product;
 
 import com.compfest.sea.entity.category.Category;
-import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.entity.user.model.User;
-import com.compfest.sea.repository.merchant.MerchantDAO;
 import com.compfest.sea.repository.product.ProductDAO;
 import com.compfest.sea.repository.product.ProductDAOList;
 import com.compfest.sea.repository.user.UserDAO;
@@ -18,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,9 +33,10 @@ public class TestProductUsecase {
 
   @InjectMocks ProductUsecase productUsecase = new ProductUsecaseImpl(productDAO, userDAO);
 
-//  List<Product> mockDB = new ArrayList<>();
+  //  List<Product> mockDB = new ArrayList<>();
   static User merchant1 = new User();
-  static Product product1 = new Product(0, "p1", "prod1", 1000, 10, merchant1, Category.SPORT, true);
+  static Product product1 =
+      new Product(0, "p1", "prod1", 1000, 10, merchant1, Category.SPORT, true);
 
   @Before
   public void setup() {
@@ -96,9 +94,9 @@ public class TestProductUsecase {
       when(productDAO1.save(product)).thenReturn(product);
       when(userDAO1.findUserById(anyInt())).thenReturn(new User());
       ProductUsecase productUsecase1 = new ProductUsecaseImpl(productDAO1, userDAO1);
-//      Product product = convertInsertPayloadToModel(invalidProductPayload, merchant1);
-//      when(productDAO.save(product)).thenReturn(product);
-//      when(userDAO.findUserById(anyInt())).thenReturn(new User());
+      //      Product product = convertInsertPayloadToModel(invalidProductPayload, merchant1);
+      //      when(productDAO.save(product)).thenReturn(product);
+      //      when(userDAO.findUserById(anyInt())).thenReturn(new User());
       List<String> messages = productUsecase1.insert(invalidProductPayload);
       List<String> expected =
           Arrays.asList("Failed, invalid payload", "Invalid payload of category");
