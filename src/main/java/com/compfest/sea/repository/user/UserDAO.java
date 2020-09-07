@@ -10,7 +10,7 @@ public interface UserDAO {
 
   User findUserById(int id);
 
-  User findUserByEmail(String email);
+  public List<User> findUserByEmail(String email);
 
   User updateUser(int id, User updatedUser);
 
