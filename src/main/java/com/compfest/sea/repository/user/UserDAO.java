@@ -9,7 +9,7 @@ public interface UserDAO {
   User insert(User newUser);
 
   User findUserById(int id);
-  
+
   public List<User> findUserByEmail(String email);
 
   User updateUser(int id, User updatedUser);

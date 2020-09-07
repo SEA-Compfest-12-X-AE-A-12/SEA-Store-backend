@@ -55,22 +55,21 @@ public class UserUsecaseImpl implements UserUsecase {
     return userDAO.findUserById(id);
   }
 
-    public List<User> findUserByEmail(String email) {
-        return userDAO.findUserByEmail(email);
-    }
+  public List<User> findUserByEmail(String email) {
+    return userDAO.findUserByEmail(email);
+  }
 
-    @Override
-    public User findUserWithRoleByEmail(String email, Role role) {
-        List<User> users = findUserByEmail(email);
-        return users.stream().filter(user -> user.getRole().equals(role)).findAny().orElse(null);
-    }
+  @Override
+  public User findUserWithRoleByEmail(String email, Role role) {
+    List<User> users = findUserByEmail(email);
+    return users.stream().filter(user -> user.getRole().equals(role)).findAny().orElse(null);
+  }
 
-
-    @Override
-    public User createUser(User newUser) {
-        newUser.setPassword(encoder.encode(newUser.getPassword()));
-        return userDAO.insert(newUser);
-    }
+  @Override
+  public User createUser(User newUser) {
+    newUser.setPassword(encoder.encode(newUser.getPassword()));
+    return userDAO.insert(newUser);
+  }
 
   @Override
   public User updateProfile(int id, User updatedUser) {
@@ -82,19 +81,19 @@ public class UserUsecaseImpl implements UserUsecase {
   public void deleteUser(int id) {
     userDAO.deleteUser(id);
   }
-  
-    @Override
-    public String authenticate(String email, String password) {
-        Authentication auth = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        return jwtUtils.generateJwtToken(auth);
-    }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        List<User> users = findUserByEmail(email);
-        return users.get(0);
-    }
+  @Override
+  public String authenticate(String email, String password) {
+    Authentication auth =
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(email, password));
+    SecurityContextHolder.getContext().setAuthentication(auth);
+    return jwtUtils.generateJwtToken(auth);
+  }
 
+  @Override
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    List<User> users = findUserByEmail(email);
+    return users.get(0);
+  }
 }

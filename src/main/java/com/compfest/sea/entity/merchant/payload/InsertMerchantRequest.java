@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InsertMerchantRequest {
-    private int userId;
-    private String name;
-    private String email;
-    private String password;
-    private String phone;
-    private String address;
-    private String description;
+  private int userId;
+  private String name;
+  private String email;
+  private String password;
+  private String phone;
+  private String address;
+  private String description;
 }

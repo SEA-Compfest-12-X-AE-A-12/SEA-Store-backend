@@ -23,59 +23,59 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserDelivery {
 
-    private UserUsecase userUsecase;
+  private UserUsecase userUsecase;
 
-    @Autowired
-    public UserDelivery(@Qualifier("UserUsecaseImpl") UserUsecase usecase) {
-        userUsecase = usecase;
-    }
+  @Autowired
+  public UserDelivery(@Qualifier("UserUsecaseImpl") UserUsecase usecase) {
+    userUsecase = usecase;
+  }
 
-    @GetMapping
-    public List<User> getUser() {
-        return userUsecase.getAllUser();
-    }
+  @GetMapping
+  public List<User> getUser() {
+    return userUsecase.getAllUser();
+  }
 
-    @PostMapping
-    public User register(@RequestBody InsertUserRequestPayload payload) {
-        User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
-        User user = userUsecase.findUserWithRoleByEmail(convertedFromPayload.getEmail(),
-                convertedFromPayload.getRole());
-        if (user != null) {
-            throw new ResourceAlreadyExistException("user");
-        }
-        return userUsecase.createUser(convertedFromPayload);
+  @PostMapping
+  public User register(@RequestBody InsertUserRequestPayload payload) {
+    User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
+    User user =
+        userUsecase.findUserWithRoleByEmail(
+            convertedFromPayload.getEmail(), convertedFromPayload.getRole());
+    if (user != null) {
+      throw new ResourceAlreadyExistException("user");
     }
+    return userUsecase.createUser(convertedFromPayload);
+  }
 
-    @GetMapping("{id}")
-    public User getUserById(@PathVariable("id") int id) {
-        User user = userUsecase.findUserById(id);
-        if (user == null) {
-            throw new ResourceNotFoundException("user");
-        }
-        return user;
+  @GetMapping("{id}")
+  public User getUserById(@PathVariable("id") int id) {
+    User user = userUsecase.findUserById(id);
+    if (user == null) {
+      throw new ResourceNotFoundException("user");
     }
+    return user;
+  }
 
-    @PutMapping("{id}")
-    public User updateProfile(@PathVariable("id") int id, @RequestBody User updatedUser) {
-        User user = userUsecase.findUserById(id);
-        if (user == null) {
-            throw new ResourceNotFoundException("user");
-        }
-        return userUsecase.updateProfile(id, updatedUser);
+  @PutMapping("{id}")
+  public User updateProfile(@PathVariable("id") int id, @RequestBody User updatedUser) {
+    User user = userUsecase.findUserById(id);
+    if (user == null) {
+      throw new ResourceNotFoundException("user");
     }
+    return userUsecase.updateProfile(id, updatedUser);
+  }
 
-    @DeleteMapping("{id}")
-    public void deleteUser(@PathVariable("id") int id) {
-        User user = userUsecase.findUserById(id);
-        if (user == null) {
-            throw new ResourceNotFoundException("user");
-        }
-        userUsecase.deleteUser(id);
+  @DeleteMapping("{id}")
+  public void deleteUser(@PathVariable("id") int id) {
+    User user = userUsecase.findUserById(id);
+    if (user == null) {
+      throw new ResourceNotFoundException("user");
     }
+    userUsecase.deleteUser(id);
+  }
 
-    @PostMapping("/login")
-    public LoginResponse authenticateUser(@RequestBody LoginRequestPayload payload) {
-        return new LoginResponse(
-                userUsecase.authenticate(payload.getEmail(), payload.getPassword()));
-    }
+  @PostMapping("/login")
+  public LoginResponse authenticateUser(@RequestBody LoginRequestPayload payload) {
+    return new LoginResponse(userUsecase.authenticate(payload.getEmail(), payload.getPassword()));
+  }
 }

@@ -15,6 +15,7 @@ public class UserAdapter {
         payload.getAddress(),
         payload.getRole());
   }
+
   public static Authentication getAuthentication() {
     return SecurityContextHolder.getContext().getAuthentication();
   }

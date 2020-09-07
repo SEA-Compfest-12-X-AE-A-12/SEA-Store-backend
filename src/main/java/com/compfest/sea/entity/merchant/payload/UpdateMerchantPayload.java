@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateMerchantPayload {
-    private String description;
-    private boolean isVerified;
-    private int balance;
+  private String description;
+  private boolean isVerified;
+  private int balance;
 }
