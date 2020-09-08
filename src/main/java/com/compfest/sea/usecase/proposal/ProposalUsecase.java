@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ProposalUsecase {
   List<String> insert(InsertProposalPayload insertProposalPayload);
+
   List<Proposal> getAll();
 }

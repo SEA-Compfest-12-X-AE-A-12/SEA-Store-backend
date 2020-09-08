@@ -7,7 +7,7 @@ import com.compfest.sea.entity.proposal.payload.InsertProposalPayload;
 import java.util.List;
 
 public interface ProposalDelivery {
-	ResponsePayload insert(InsertProposalPayload insertProposalPayload);
+  ResponsePayload insert(InsertProposalPayload insertProposalPayload);
 
-	List<Proposal> getAll();
+  List<Proposal> getAll();
 }
