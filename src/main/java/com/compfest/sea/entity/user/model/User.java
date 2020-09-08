@@ -48,7 +48,9 @@ public class User implements UserDetails {
   @Size(max = 100)
   private String address;
 
-  @NotBlank @Enumerated(EnumType.STRING) private Role role;
+  @NotBlank
+  @Enumerated(EnumType.STRING)
+  private Role role;
 
   public User(String name, String email, String password, String phone, String address, Role role) {
     this.name = name;
