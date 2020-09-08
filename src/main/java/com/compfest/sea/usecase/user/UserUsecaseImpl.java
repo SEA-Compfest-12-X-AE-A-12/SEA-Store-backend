@@ -55,9 +55,14 @@ public class UserUsecaseImpl implements UserUsecase {
     return userDAO.findUserById(id);
   }
 
-  @Override
-  public User findUserByEmail(String email) {
+  public List<User> findUserByEmail(String email) {
     return userDAO.findUserByEmail(email);
+  }
+
+  @Override
+  public User findUserWithRoleByEmail(String email, Role role) {
+    List<User> users = findUserByEmail(email);
+    return users.stream().filter(user -> user.getRole().equals(role)).findAny().orElse(null);
   }
 
   @Override
@@ -88,6 +93,7 @@ public class UserUsecaseImpl implements UserUsecase {
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    return userDAO.findUserByEmail(email);
+    List<User> users = findUserByEmail(email);
+    return users.get(0);
   }
 }

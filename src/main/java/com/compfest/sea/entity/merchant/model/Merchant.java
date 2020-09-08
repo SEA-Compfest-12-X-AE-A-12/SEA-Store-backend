@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Merchant {
-    private int userID;
-    private String description;
-    private boolean isVerified;
-    private int balance;
+  private int userID;
+  private String description;
+  private boolean isVerified;
+  private int balance;
 
-    public Merchant(String description, boolean isVerified, int balance) {
-        this.description = description;
-        this.isVerified = isVerified;
-        this.balance = balance;
-    }
+  public Merchant(String description, boolean isVerified, int balance) {
+    this.description = description;
+    this.isVerified = isVerified;
+    this.balance = balance;
+  }
 }

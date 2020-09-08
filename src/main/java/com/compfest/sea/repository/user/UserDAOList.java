@@ -1,10 +1,10 @@
 package com.compfest.sea.repository.user;
 
-import com.compfest.sea.entity.user.model.User;
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import com.compfest.sea.entity.user.model.User;
+import org.springframework.stereotype.Repository;
 
 @Repository("UserDAOList")
 public class UserDAOList implements UserDAO {
@@ -31,8 +31,8 @@ public class UserDAOList implements UserDAO {
   }
 
   @Override
-  public User findUserByEmail(String email) {
-    return DB.stream().filter(user -> email.equals(user.getEmail())).findAny().orElse(null);
+  public List<User> findUserByEmail(String email) {
+    return DB.stream().filter(user -> email.equals(user.getEmail())).collect(Collectors.toList());
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.compfest.sea.usecase.user;
 
 import java.util.List;
+import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ public interface UserUsecase extends UserDetailsService {
 
   User findUserById(int id);
 
-  User findUserByEmail(String email);
+  public User findUserWithRoleByEmail(String email, Role role);
 
   User createUser(User newUser);
 
