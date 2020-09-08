@@ -28,8 +28,8 @@ public class ProductDAODatabase implements ProductDAO {
   }
 
   @Override
-  public List<Product> findAll() {
-    return productDAOJPA.findAll();
+  public List<Product> findAllByActive(Boolean active) {
+    return productDAOJPA.findAllByActive(active);
   }
 
   @Override

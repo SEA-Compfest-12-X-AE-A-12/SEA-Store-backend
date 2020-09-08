@@ -1,6 +1,7 @@
 package com.compfest.sea.repository.product;
 
 import com.compfest.sea.entity.product.model.Product;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -50,7 +51,7 @@ public class ProductDAOList implements ProductDAO {
   }
 
   @Override
-  public List<Product> findAll() {
+  public List<Product> findAllByActive(Boolean active) {
     return products;
   }
 

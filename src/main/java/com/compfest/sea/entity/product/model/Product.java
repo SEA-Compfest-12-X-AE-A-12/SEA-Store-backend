@@ -35,6 +35,7 @@ public class Product {
   private User merchant;
 
   @Column(name = "category")
+  @Enumerated(EnumType.STRING)
   private Category category;
 
   @Column(name = "active", columnDefinition = "boolean default true")
