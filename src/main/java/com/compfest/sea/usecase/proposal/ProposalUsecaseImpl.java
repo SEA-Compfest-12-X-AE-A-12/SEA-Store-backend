@@ -39,6 +39,11 @@ public class ProposalUsecaseImpl implements ProposalUsecase {
     return messages;
   }
 
+  @Override
+  public List<Proposal> getAll() {
+    return proposalDAO.findAll();
+  }
+
   private List<String> validateProposal(InsertProposalPayload insertProposalPayload) {
     List<String> messages = new ArrayList<>();
     Merchant merchant = merchantDAO.findByUserId(insertProposalPayload.getMerchantId());

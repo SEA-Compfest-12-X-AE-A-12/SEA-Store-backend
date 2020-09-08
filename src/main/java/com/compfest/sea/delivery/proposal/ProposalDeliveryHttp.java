@@ -1,11 +1,14 @@
 package com.compfest.sea.delivery.proposal;
 
 import com.compfest.sea.entity.product.payload.ResponsePayload;
+import com.compfest.sea.entity.proposal.model.Proposal;
 import com.compfest.sea.entity.proposal.payload.InsertProposalPayload;
 import com.compfest.sea.usecase.proposal.ProposalUsecase;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @EnableAutoConfiguration
 @RestController
@@ -22,5 +25,11 @@ public class ProposalDeliveryHttp implements ProposalDelivery {
   @PostMapping("/upload")
   public ResponsePayload insert(@RequestBody InsertProposalPayload insertProposalPayload) {
     return new ResponsePayload(proposalUsecase.insert(insertProposalPayload));
+  }
+
+  @Override
+  @GetMapping("/")
+  public List<Proposal> getAll() {
+    return proposalUsecase.getAll();
   }
 }
