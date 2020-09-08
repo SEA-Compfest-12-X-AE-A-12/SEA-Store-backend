@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/proposals")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ProposalDeliveryHttp implements ProposalDelivery{
-	private final ProposalUsecase proposalUsecase;
+public class ProposalDeliveryHttp implements ProposalDelivery {
+  private final ProposalUsecase proposalUsecase;
 
-	public ProposalDeliveryHttp(@Qualifier("ProposalUsecaseImpl1") ProposalUsecase proposalUsecase) {
-		this.proposalUsecase = proposalUsecase;
-	}
+  public ProposalDeliveryHttp(@Qualifier("ProposalUsecaseImpl1") ProposalUsecase proposalUsecase) {
+    this.proposalUsecase = proposalUsecase;
+  }
 
-	@Override
-	@PostMapping("/upload")
-	public ResponsePayload insert(@RequestBody InsertProposalPayload insertProposalPayload) {
-		return new ResponsePayload(proposalUsecase.insert(insertProposalPayload));
-	}
+  @Override
+  @PostMapping("/upload")
+  public ResponsePayload insert(@RequestBody InsertProposalPayload insertProposalPayload) {
+    return new ResponsePayload(proposalUsecase.insert(insertProposalPayload));
+  }
 }

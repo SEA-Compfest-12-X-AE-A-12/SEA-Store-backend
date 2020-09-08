@@ -16,37 +16,38 @@ import java.util.List;
 @Service("ProposalUsecaseImpl1")
 public class ProposalUsecaseImpl implements ProposalUsecase {
 
-	private final ProposalDAO proposalDAO;
-	private final MerchantDAO merchantDAO;
+  private final ProposalDAO proposalDAO;
+  private final MerchantDAO merchantDAO;
 
-	public ProposalUsecaseImpl(ProposalDAO proposalDAO,@Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
-		this.proposalDAO = proposalDAO;
-		this.merchantDAO = merchantDAO;
-	}
+  public ProposalUsecaseImpl(
+      ProposalDAO proposalDAO, @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
+    this.proposalDAO = proposalDAO;
+    this.merchantDAO = merchantDAO;
+  }
 
-	@Override
-	public List<String> insert(InsertProposalPayload insertProposalPayload) {
-		List<String> messages = validateProposal(insertProposalPayload);
-		if(!messages.isEmpty()) return  messages;
-		try{
-			Merchant merchant = merchantDAO.findByUserId(insertProposalPayload.getMerchantId());
-			Proposal proposal = Adapter.convertInsertPayloadToModel(insertProposalPayload, merchant);
-			proposalDAO.save(proposal);
-		}catch (Exception e){
-			messages.add("Failed, "+e);
-		}
-		return messages;
-	}
-
-	private List<String> validateProposal(InsertProposalPayload insertProposalPayload){
-		List<String> messages = new ArrayList<>();
-		Merchant merchant = merchantDAO.findByUserId(insertProposalPayload.getMerchantId());
-    if (merchant == null){
-    	messages.add("Failed, invalid author of proposal");
-    }
-    if(!Category.isValidCategory(insertProposalPayload.getMerchantCategory())){
-	    messages.add("Failed, invalid category of proposal");
+  @Override
+  public List<String> insert(InsertProposalPayload insertProposalPayload) {
+    List<String> messages = validateProposal(insertProposalPayload);
+    if (!messages.isEmpty()) return messages;
+    try {
+      Merchant merchant = merchantDAO.findByUserId(insertProposalPayload.getMerchantId());
+      Proposal proposal = Adapter.convertInsertPayloadToModel(insertProposalPayload, merchant);
+      proposalDAO.save(proposal);
+    } catch (Exception e) {
+      messages.add("Failed, " + e);
     }
     return messages;
-	}
+  }
+
+  private List<String> validateProposal(InsertProposalPayload insertProposalPayload) {
+    List<String> messages = new ArrayList<>();
+    Merchant merchant = merchantDAO.findByUserId(insertProposalPayload.getMerchantId());
+    if (merchant == null) {
+      messages.add("Failed, invalid author of proposal");
+    }
+    if (!Category.isValidCategory(insertProposalPayload.getMerchantCategory())) {
+      messages.add("Failed, invalid category of proposal");
+    }
+    return messages;
+  }
 }
