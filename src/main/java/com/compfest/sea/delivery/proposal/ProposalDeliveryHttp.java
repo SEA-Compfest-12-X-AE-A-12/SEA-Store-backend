@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @EnableAutoConfiguration
@@ -37,8 +36,8 @@ public class ProposalDeliveryHttp implements ProposalDelivery {
 
   @Override
   @PutMapping("/updateStatus")
-  public List<String> updateStatus(@RequestBody UpdateStatusProposalPayload updateStatusProposalPayload){
+  public List<String> updateStatus(
+      @RequestBody UpdateStatusProposalPayload updateStatusProposalPayload) {
     return proposalUsecase.updateStatus(updateStatusProposalPayload);
   }
-
 }

@@ -10,7 +10,6 @@ import com.compfest.sea.entity.proposal.payload.UpdateStatusProposalPayload;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.merchant.MerchantDAO;
 import com.compfest.sea.repository.proposal.ProposalDAO;
-import com.compfest.sea.repository.user.UserDAO;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +29,11 @@ public class ProposalUsecaseImpl implements ProposalUsecase {
   private final Logger logger = LoggerFactory.getLogger(ProposalUsecaseImpl.class);
   @Autowired @Lazy private final ProposalDAO proposalDAO;
   private final MerchantDAO merchantDAO;
-//  private final UserDAO userDAO;
+  //  private final UserDAO userDAO;
 
   @Autowired
   public ProposalUsecaseImpl(
-    ProposalDAO proposalDAO, @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
+      ProposalDAO proposalDAO, @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
     this.proposalDAO = proposalDAO;
     this.merchantDAO = merchantDAO;
   }
@@ -62,35 +61,41 @@ public class ProposalUsecaseImpl implements ProposalUsecase {
   @Override
   @Transactional
   public List<String> updateStatus(UpdateStatusProposalPayload updateStatusProposalPayload) {
-    Proposal proposal = proposalDAO.findById(updateStatusProposalPayload.getProposalId()).orElse(null);
-    List<String> messages = validateUpdateStatusProposal(updateStatusProposalPayload,proposal);
-    if(!messages.isEmpty()) return messages;
+    Proposal proposal =
+        proposalDAO.findById(updateStatusProposalPayload.getProposalId()).orElse(null);
+    List<String> messages = validateUpdateStatusProposal(updateStatusProposalPayload, proposal);
+    if (!messages.isEmpty()) return messages;
 
-    try{
+    try {
       proposal.setProposalStatus(
-        updateStatusProposalPayload.getApproval() ?
-          ProposalStatus.ACCEPTED :
-          ProposalStatus.REJECTED
-      );
-      if(updateStatusProposalPayload.getApproval()){
+          updateStatusProposalPayload.getApproval()
+              ? ProposalStatus.ACCEPTED
+              : ProposalStatus.REJECTED);
+      if (updateStatusProposalPayload.getApproval()) {
         Merchant merchant = proposal.getMerchant();
-        if(merchant == null){
+        if (merchant == null) {
           messages.add("Failed, no merchant with status updated proposal");
-          return  messages;
+          return messages;
         }
         merchant.setVerified(true);
         // merchantDAO.save(merchant); //TODO: waiting for merchant JPA
       }
-      User reviewer = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+      User reviewer =
+          ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
       proposal.setReviewedByAdminId(reviewer.getId());
-      logger.info(proposal.getId()+proposal.getDescription());
+      logger.info(proposal.getId() + proposal.getDescription());
       proposalDAO.save(proposal);
-      return Arrays.asList("Success, update status "+proposal.getId()+" to "+
-        (updateStatusProposalPayload.getApproval() ? ProposalStatus.ACCEPTED : ProposalStatus.REJECTED));
+      return Arrays.asList(
+          "Success, update status "
+              + proposal.getId()
+              + " to "
+              + (updateStatusProposalPayload.getApproval()
+                  ? ProposalStatus.ACCEPTED
+                  : ProposalStatus.REJECTED));
 
-    }catch (Exception e){
-      logger.error(e+"");
-      return Arrays.asList("Failed, "+e);
+    } catch (Exception e) {
+      logger.error(e + "");
+      return Arrays.asList("Failed, " + e);
     }
   }
 
@@ -106,13 +111,18 @@ public class ProposalUsecaseImpl implements ProposalUsecase {
     return messages;
   }
 
-  private List<String> validateUpdateStatusProposal(UpdateStatusProposalPayload updateStatusProposalPayload, Proposal proposal){
+  private List<String> validateUpdateStatusProposal(
+      UpdateStatusProposalPayload updateStatusProposalPayload, Proposal proposal) {
     List<String> messages = new ArrayList<>();
-    if(proposal == null){
-      messages.add("Proposal "+updateStatusProposalPayload.getProposalId()+" not found");
-    }else if(proposal.getProposalStatus() != ProposalStatus.ON_REVIEW){
-      messages.add("Proposal "+updateStatusProposalPayload.getProposalId()+" has been "+ proposal.getProposalStatus());
+    if (proposal == null) {
+      messages.add("Proposal " + updateStatusProposalPayload.getProposalId() + " not found");
+    } else if (proposal.getProposalStatus() != ProposalStatus.ON_REVIEW) {
+      messages.add(
+          "Proposal "
+              + updateStatusProposalPayload.getProposalId()
+              + " has been "
+              + proposal.getProposalStatus());
     }
-    return  messages;
+    return messages;
   }
 }

@@ -12,5 +12,5 @@ public interface ProposalDelivery {
 
   List<Proposal> getAll();
 
-	List<String> updateStatus(UpdateStatusProposalPayload updateStatusProposalPayload);
+  List<String> updateStatus(UpdateStatusProposalPayload updateStatusProposalPayload);
 }
