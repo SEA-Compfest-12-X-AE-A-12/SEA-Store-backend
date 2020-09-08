@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UpdateStatusProposalPayload {
-	Integer proposalId;
-	Boolean approval;
+  Integer proposalId;
+  Boolean approval;
 }

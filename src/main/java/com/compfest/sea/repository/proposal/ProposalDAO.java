@@ -1,6 +1,5 @@
 package com.compfest.sea.repository.proposal;
 
-import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.entity.proposal.model.Proposal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
