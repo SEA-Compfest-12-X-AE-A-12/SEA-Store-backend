@@ -28,14 +28,11 @@ import java.util.List;
 public class ProposalUsecaseImpl implements ProposalUsecase {
 
   private final Logger logger = LoggerFactory.getLogger(ProposalUsecaseImpl.class);
-  @Autowired @Lazy private final ProposalDAO proposalDAO;
+  @Autowired @Lazy private ProposalDAO proposalDAO;
   private final MerchantDAO merchantDAO;
-//  private final UserDAO userDAO;
 
   @Autowired
-  public ProposalUsecaseImpl(
-    ProposalDAO proposalDAO, @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
-    this.proposalDAO = proposalDAO;
+  public ProposalUsecaseImpl(@Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
     this.merchantDAO = merchantDAO;
   }
 
