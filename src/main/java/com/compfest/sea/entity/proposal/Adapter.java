@@ -5,13 +5,14 @@ import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.proposal.model.Proposal;
 import com.compfest.sea.entity.proposal.model.ProposalStatus;
 import com.compfest.sea.entity.proposal.payload.InsertProposalPayload;
+import com.compfest.sea.entity.user.model.User;
 
 public class Adapter {
   public static Proposal convertInsertPayloadToModel(
       InsertProposalPayload insertProposalPayload, Merchant merchant) {
     return new Proposal(
         0,
-        0,
+        null,
         merchant,
         insertProposalPayload.getDescription(),
         Category.valueOf(insertProposalPayload.getMerchantCategory()),

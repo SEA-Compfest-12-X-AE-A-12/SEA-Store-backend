@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProposalDAO extends JpaRepository<Proposal, Integer> {
-  Product save(Product product);
+  Proposal save(Proposal proposal);
 
   Optional<Proposal> findById(Integer integer);
 
