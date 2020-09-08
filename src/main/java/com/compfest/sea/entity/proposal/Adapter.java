@@ -7,17 +7,17 @@ import com.compfest.sea.entity.proposal.model.ProposalStatus;
 import com.compfest.sea.entity.proposal.payload.InsertProposalPayload;
 
 public class Adapter {
-	public static Proposal convertInsertPayloadToModel(InsertProposalPayload insertProposalPayload, Merchant merchant){
-		return new Proposal(
-			0,
-			0,
-			merchant,
-			insertProposalPayload.getDescription(),
-			Category.valueOf(insertProposalPayload.getMerchantCategory()),
-			insertProposalPayload.getVision(),
-			insertProposalPayload.getMission(),
-			insertProposalPayload.getMotivation(),
-			ProposalStatus.ON_REVIEW
-		);
-	}
+  public static Proposal convertInsertPayloadToModel(
+      InsertProposalPayload insertProposalPayload, Merchant merchant) {
+    return new Proposal(
+        0,
+        0,
+        merchant,
+        insertProposalPayload.getDescription(),
+        Category.valueOf(insertProposalPayload.getMerchantCategory()),
+        insertProposalPayload.getVision(),
+        insertProposalPayload.getMission(),
+        insertProposalPayload.getMotivation(),
+        ProposalStatus.ON_REVIEW);
+  }
 }
