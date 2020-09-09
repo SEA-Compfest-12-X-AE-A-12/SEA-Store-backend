@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ProductDAOJPA extends JpaRepository<Product, Integer> {
   Optional<Product> findById(Integer integer);
 
-  List<Product> findAll();
+  List<Product> findAllByActive(Boolean active);
 
   Page<Product> findAll(Pageable pageable);
 }

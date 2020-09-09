@@ -50,7 +50,7 @@ public class ProductDAOList implements ProductDAO {
   }
 
   @Override
-  public List<Product> findAll() {
+  public List<Product> findAllByActive(Boolean active) {
     return products;
   }
 

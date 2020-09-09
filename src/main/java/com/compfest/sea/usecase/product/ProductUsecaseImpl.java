@@ -82,7 +82,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
   @Override
   public List<Product> getAll() {
     try {
-      return productDAO.findAll();
+      return productDAO.findAllByActive(true);
     } catch (Exception e) {
       return new ArrayList<>();
     }

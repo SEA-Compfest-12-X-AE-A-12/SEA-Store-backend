@@ -77,6 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/v1/products/detail/{\\d+}",
             "/api/v1/products/{\\d+}")
         .permitAll()
+        .antMatchers(HttpMethod.POST, "/api/v1/proposals/upload")
+        .permitAll()
         .anyRequest()
         .authenticated();
 
