@@ -10,8 +10,6 @@ import com.compfest.sea.entity.proposal.payload.UpdateStatusProposalPayload;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.merchant.MerchantDAO;
 import com.compfest.sea.repository.proposal.ProposalDAO;
-import com.compfest.sea.repository.user.UserDAO;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +26,12 @@ import java.util.List;
 public class ProposalUsecaseImpl implements ProposalUsecase {
 
   private final Logger logger = LoggerFactory.getLogger(ProposalUsecaseImpl.class);
-  @Autowired @Lazy private ProposalDAO proposalDAO;
+  private final ProposalDAO proposalDAO;
   private final MerchantDAO merchantDAO;
 
   @Autowired
-  public ProposalUsecaseImpl(@Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
+  public ProposalUsecaseImpl(@Qualifier("ProposalDAODB") ProposalDAO proposalDAO, @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
+    this.proposalDAO = proposalDAO;
     this.merchantDAO = merchantDAO;
   }
 
