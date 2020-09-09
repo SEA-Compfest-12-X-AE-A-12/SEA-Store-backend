@@ -2,12 +2,15 @@ package com.compfest.sea.delivery.merchant;
 
 import java.util.List;
 import com.compfest.sea.entity.merchant.model.Merchant;
+import com.compfest.sea.entity.merchant.model.Withdrawal;
 import com.compfest.sea.entity.merchant.payload.InsertMerchantRequest;
 import com.compfest.sea.entity.merchant.payload.UpdateMerchantPayload;
+import com.compfest.sea.entity.merchant.payload.WithdrawBalanceRequest;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.usecase.merchant.MerchantUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,5 +63,21 @@ public class MerchantDelivery {
   @DeleteMapping("{id}")
   public void deleteMerchant(@PathVariable("id") int userId) {
     merchantUsecase.deleteMerchant(userId);
+  }
+
+  @PostMapping("/withdraw")
+  public Withdrawal withdrawBalance(
+      @RequestBody WithdrawBalanceRequest request, Authentication auth) throws Exception {
+    User user = (User) auth.getPrincipal();
+    Merchant merchant = merchantUsecase.findByUserId(user.getId());
+    return merchantUsecase.withdrawBalance(
+        merchant, request.getBankName(), request.getAccountNumber(), request.getAmount());
+  }
+
+  @GetMapping("/balance-history")
+  public List<Withdrawal> balanceHistory(Authentication auth) {
+    User user = (User) auth.getPrincipal();
+    Merchant merchant = merchantUsecase.findByUserId((user.getId()));
+    return merchantUsecase.getBalanceHistory(merchant);
   }
 }
