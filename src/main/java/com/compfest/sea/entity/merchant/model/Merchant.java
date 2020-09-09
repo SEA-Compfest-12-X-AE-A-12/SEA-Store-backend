@@ -31,6 +31,9 @@ public class Merchant {
   @OneToMany(mappedBy = "merchant")
   private List<Product> products;
 
+  @OneToMany(mappedBy = "merchant")
+  private List<Withdrawal> withdrawals;
+
   public Merchant(String description, boolean isVerified, int balance) {
     this.description = description;
     this.isVerified = isVerified;

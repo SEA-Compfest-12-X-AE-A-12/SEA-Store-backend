@@ -2,6 +2,7 @@ package com.compfest.sea.usecase.merchant;
 
 import java.util.List;
 import com.compfest.sea.entity.merchant.model.Merchant;
+import com.compfest.sea.entity.merchant.model.Withdrawal;
 import com.compfest.sea.entity.user.model.User;
 
 public interface MerchantUsecase {
@@ -19,5 +20,5 @@ public interface MerchantUsecase {
 
   public void verifyMerchant(int userId);
 
-  public void withdrawBalance(int userId, int balance);
+  public Withdrawal withdrawBalance(Merchant merchant, String bankName, String accountNumber, int amount) throws Exception;
 }
