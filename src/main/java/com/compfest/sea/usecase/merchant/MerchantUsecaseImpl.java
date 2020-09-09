@@ -68,10 +68,11 @@ public class MerchantUsecaseImpl implements MerchantUsecase {
   }
 
   @Override
-  public Withdrawal withdrawBalance(Merchant merchant, String bankName, String accountNumber, int amount) throws Exception {
+  public Withdrawal withdrawBalance(
+      Merchant merchant, String bankName, String accountNumber, int amount) throws Exception {
     int balance = merchant.getBalance();
     if (amount >= 0 && amount <= balance) {
-      merchant.setBalance(balance-amount);
+      merchant.setBalance(balance - amount);
       merchantDAO.updateMerchant(merchant.getUserID(), merchant);
       return withdrawalDAO.insert(new Withdrawal(amount, bankName, accountNumber, merchant));
     } else {

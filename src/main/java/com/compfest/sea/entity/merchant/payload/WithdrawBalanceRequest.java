@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WithdrawBalanceRequest {
-    private String bankName;
-    private String accountNumber;
-    private Integer amount;
+  private String bankName;
+  private String accountNumber;
+  private Integer amount;
 }

@@ -9,11 +9,11 @@ import java.util.List;
 @Repository("WithdrawalDAOList")
 public class WithdrawalDAOList implements WithdrawalDAO {
 
-    private static List<Withdrawal> DB = new ArrayList<>();
+  private static List<Withdrawal> DB = new ArrayList<>();
 
-    @Override
-    public Withdrawal insert(Withdrawal newWithdrawal) {
-        DB.add(newWithdrawal);
-        return newWithdrawal;
-    }
+  @Override
+  public Withdrawal insert(Withdrawal newWithdrawal) {
+    DB.add(newWithdrawal);
+    return newWithdrawal;
+  }
 }

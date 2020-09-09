@@ -20,5 +20,6 @@ public interface MerchantUsecase {
 
   public void verifyMerchant(int userId);
 
-  public Withdrawal withdrawBalance(Merchant merchant, String bankName, String accountNumber, int amount) throws Exception;
+  public Withdrawal withdrawBalance(
+      Merchant merchant, String bankName, String accountNumber, int amount) throws Exception;
 }

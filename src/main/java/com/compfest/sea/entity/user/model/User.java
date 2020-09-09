@@ -45,8 +45,7 @@ public class User implements UserDetails {
   @Size(max = 100)
   private String address;
 
-  @Column
-  private Role role;
+  @Column private Role role;
 
   @Column(name = "active", columnDefinition = "boolean default true")
   private Boolean active = true;
@@ -55,7 +54,8 @@ public class User implements UserDetails {
   @JsonProperty(access = Access.WRITE_ONLY)
   private Merchant merchant;
 
-  public User(int id, String name, String email, String password, String phone, String address, Role role) {
+  public User(
+      int id, String name, String email, String password, String phone, String address, Role role) {
     this.id = id;
     this.name = name;
     this.email = email;

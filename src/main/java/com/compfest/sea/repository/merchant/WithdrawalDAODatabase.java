@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository("withdrawalRepoDB")
 public class WithdrawalDAODatabase implements WithdrawalDAO {
-    @Autowired @Lazy WithdrawalDAOJPA withdrawalDAOJPA;
+  @Autowired @Lazy WithdrawalDAOJPA withdrawalDAOJPA;
 
-    @Override
-    public Withdrawal insert(Withdrawal newWithdrawal) {
-        return withdrawalDAOJPA.save(newWithdrawal);
-    }
+  @Override
+  public Withdrawal insert(Withdrawal newWithdrawal) {
+    return withdrawalDAOJPA.save(newWithdrawal);
+  }
 }

@@ -10,37 +10,37 @@ import java.util.List;
 
 @Repository("userRepoDB")
 public class UserDAODatabase implements UserDAO {
-    @Autowired @Lazy UserDAOJPA userDAOJPA;
+  @Autowired @Lazy UserDAOJPA userDAOJPA;
 
-    @Override
-    public List<User> findAll() {
-        return userDAOJPA.findAll();
-    }
+  @Override
+  public List<User> findAll() {
+    return userDAOJPA.findAll();
+  }
 
-    @Override
-    public User insert(User newUser) {
-        return userDAOJPA.save(newUser);
-    }
+  @Override
+  public User insert(User newUser) {
+    return userDAOJPA.save(newUser);
+  }
 
-    @Override
-    public User findUserById(int id) {
-        return userDAOJPA.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
+  @Override
+  public User findUserById(int id) {
+    return userDAOJPA.findById(id).orElseThrow(EntityNotFoundException::new);
+  }
 
-    @Override
-    public List<User> findUserByEmail(String email) {
-        return userDAOJPA.findAllByEmail(email);
-    }
+  @Override
+  public List<User> findUserByEmail(String email) {
+    return userDAOJPA.findAllByEmail(email);
+  }
 
-    @Override
-    public User updateUser(int id, User updatedUser) {
-        return userDAOJPA.save(updatedUser);
-    }
+  @Override
+  public User updateUser(int id, User updatedUser) {
+    return userDAOJPA.save(updatedUser);
+  }
 
-    @Override
-    public void deleteUser(int id) {
-        User user = userDAOJPA.findById(id).orElseThrow(EntityNotFoundException::new);
-        user.setActive(false);
-        userDAOJPA.save(user);
-    }
+  @Override
+  public void deleteUser(int id) {
+    User user = userDAOJPA.findById(id).orElseThrow(EntityNotFoundException::new);
+    user.setActive(false);
+    userDAOJPA.save(user);
+  }
 }
