@@ -1,6 +1,8 @@
 package com.compfest.sea.entity.user.model;
 
+import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.order.model.Order;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.AllArgsConstructor;
@@ -53,6 +55,24 @@ public class User implements UserDetails {
   @NotBlank
   @Enumerated(EnumType.STRING)
   private Role role;
+
+  @Column(name = "active", columnDefinition = "boolean default true")
+  private Boolean active = true;
+
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+  @JsonIgnore
+  private Merchant merchant;
+
+  public User(
+      int id, String najdme, String email, String password, String phone, String address, Role role) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.phone = phone;
+    this.address = address;
+    this.role = role;
+  }
 
   @OneToMany(mappedBy = "customer")
   private List<Order> orders;

@@ -26,7 +26,7 @@ public class UserUsecaseImpl implements UserUsecase {
 
   @Autowired
   public UserUsecaseImpl(
-      @Qualifier("UserDAOList") UserDAO userDAO,
+      @Qualifier("userRepoDB") UserDAO userDAO,
       AuthenticationManager authenticationManager,
       JwtUtils jwtUtils,
       PasswordEncoder encoder) {
@@ -34,9 +34,6 @@ public class UserUsecaseImpl implements UserUsecase {
     this.authenticationManager = authenticationManager;
     this.jwtUtils = jwtUtils;
     this.encoder = encoder;
-    userDAO.insert(
-        new User(
-            "admin", "admin@mail.com", encoder.encode("admin123"), "123", "address", Role.ADMIN));
   }
 
   @Override
