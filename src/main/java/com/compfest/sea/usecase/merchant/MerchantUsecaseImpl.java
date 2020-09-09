@@ -74,7 +74,8 @@ public class MerchantUsecaseImpl implements MerchantUsecase {
     if (amount >= 0 && amount <= balance) {
       merchant.setBalance(balance - amount);
       merchantDAO.updateMerchant(merchant.getUserID(), merchant);
-      return withdrawalDAO.insert(new Withdrawal(amount, bankName, accountNumber, merchant, merchant.getBalance()));
+      return withdrawalDAO.insert(
+          new Withdrawal(amount, bankName, accountNumber, merchant, merchant.getBalance()));
     } else {
       throw new Exception("Invalid amount");
     }
