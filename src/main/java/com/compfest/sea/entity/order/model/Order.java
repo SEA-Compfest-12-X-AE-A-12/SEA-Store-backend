@@ -17,30 +17,30 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-	@Enumerated(EnumType.STRING)
-	@Column(columnDefinition = "varchar(255) default 'IN_CART'")
-	private OrderStatus status;
+  @Enumerated(EnumType.STRING)
+  @Column(columnDefinition = "varchar(255) default 'IN_CART'")
+  private OrderStatus status;
 
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(columnDefinition= "TIMESTAMP WITH TIME ZONE")
-	private Date createdAt;
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+  private Date createdAt;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id")
-	private User customer;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "customer_id")
+  private User customer;
 
-	@Column(name = "reviewer_id")
-	private Integer reviewedByAdminId;
+  @Column(name = "reviewer_id")
+  private Integer reviewedByAdminId;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(columnDefinition= "TIMESTAMP WITH TIME ZONE")
-	private Date reviewedAt;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+  private Date reviewedAt;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<OrderDetail> orderDetails;
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+  private List<OrderDetail> orderDetails;
 }
