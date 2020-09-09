@@ -36,7 +36,6 @@ public class UserUsecaseImpl implements UserUsecase {
     this.encoder = encoder;
     userDAO.insert(
         new User(
-            1,
             "admin",
             "admin@mail.com",
             encoder.encode("admin123"),
