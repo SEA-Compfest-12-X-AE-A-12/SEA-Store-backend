@@ -22,4 +22,6 @@ public interface MerchantUsecase {
 
   public Withdrawal withdrawBalance(
       Merchant merchant, String bankName, String accountNumber, int amount) throws Exception;
+
+  public List<Withdrawal> getBalanceHistory(Merchant merchant);
 }

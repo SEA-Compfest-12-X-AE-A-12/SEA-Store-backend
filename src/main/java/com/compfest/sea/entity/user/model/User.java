@@ -1,6 +1,7 @@
 package com.compfest.sea.entity.user.model;
 
 import com.compfest.sea.entity.merchant.model.Merchant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.AllArgsConstructor;
@@ -51,7 +52,7 @@ public class User implements UserDetails {
   private Boolean active = true;
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  @JsonProperty(access = Access.WRITE_ONLY)
+  @JsonIgnore
   private Merchant merchant;
 
   public User(

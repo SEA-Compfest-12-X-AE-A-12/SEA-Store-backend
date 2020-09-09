@@ -1,5 +1,6 @@
 package com.compfest.sea.repository.merchant;
 
+import com.compfest.sea.entity.merchant.model.Merchant;
 import com.compfest.sea.entity.merchant.model.Withdrawal;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,10 @@ public class WithdrawalDAOList implements WithdrawalDAO {
   public Withdrawal insert(Withdrawal newWithdrawal) {
     DB.add(newWithdrawal);
     return newWithdrawal;
+  }
+
+  @Override
+  public List<Withdrawal> findAllByMerchant(Merchant merchant) {
+    return null;
   }
 }

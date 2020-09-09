@@ -21,13 +21,19 @@ public class Withdrawal {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
+  @Column
   private Integer amount;
 
+  @Column
+  private Integer remainingBalance;
+
   @Size(max = 50)
+  @Column
   private String bankName;
 
   @Size(max = 50)
   @Pattern(regexp = "\\d+")
+  @Column
   private String accountNumber;
 
   @ManyToOne
@@ -40,8 +46,9 @@ public class Withdrawal {
   @Column(name = "timestamp")
   private Date timestamp;
 
-  public Withdrawal(Integer amount, String bankName, String accountNumber, Merchant merchant) {
+  public Withdrawal(Integer amount, String bankName, String accountNumber, Merchant merchant, Integer remainingBalance) {
     this.amount = amount;
+    this.remainingBalance = remainingBalance;
     this.bankName = bankName;
     this.accountNumber = accountNumber;
     this.merchant = merchant;

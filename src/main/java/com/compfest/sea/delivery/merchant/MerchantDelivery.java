@@ -73,4 +73,11 @@ public class MerchantDelivery {
     return merchantUsecase.withdrawBalance(
         merchant, request.getBankName(), request.getAccountNumber(), request.getAmount());
   }
+
+  @GetMapping("/balance-history")
+  public List<Withdrawal> balanceHistory(Authentication auth) {
+    User user = (User) auth.getPrincipal();
+    Merchant merchant = merchantUsecase.findByUserId((user.getId()));
+    return merchantUsecase.getBalanceHistory(merchant);
+  }
 }

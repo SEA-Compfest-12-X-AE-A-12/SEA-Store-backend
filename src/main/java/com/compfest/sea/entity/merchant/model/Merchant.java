@@ -3,6 +3,7 @@ package com.compfest.sea.entity.merchant.model;
 import com.compfest.sea.entity.product.model.Product;
 import com.compfest.sea.entity.proposal.Proposal;
 import com.compfest.sea.entity.user.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,10 @@ public class Merchant {
   @Column(name = "user_id")
   private int userID;
 
-  @OneToOne @MapsId private User user;
+  @OneToOne
+  @MapsId
+  @JsonIgnore
+  private User user;
   private String description;
   private boolean isVerified;
   private int balance;
