@@ -12,7 +12,7 @@ public interface ProductDAO {
 
   Optional<Product> findById(Integer integer);
 
-  List<Product> findAll();
+  List<Product> findAllByActive(Boolean active);
 
   Page<Product> findAll(Pageable pageable);
 

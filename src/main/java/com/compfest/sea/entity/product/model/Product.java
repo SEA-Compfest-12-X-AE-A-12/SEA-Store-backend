@@ -1,6 +1,7 @@
 package com.compfest.sea.entity.product.model;
 
 import com.compfest.sea.entity.category.Category;
+import com.compfest.sea.entity.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,10 +30,12 @@ public class Product {
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
 
-  @Column(name = "merchantId", nullable = false)
-  private Integer merchantId;
+  @ManyToOne
+  @JoinColumn(name = "merchant_id")
+  private User merchant;
 
   @Column(name = "category")
+  @Enumerated(EnumType.STRING)
   private Category category;
 
   @Column(name = "active", columnDefinition = "boolean default true")
