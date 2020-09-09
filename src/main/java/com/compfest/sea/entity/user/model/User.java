@@ -46,7 +46,8 @@ public class User implements UserDetails {
   @Size(max = 100)
   private String address;
 
-  @Enumerated(EnumType.STRING) private Role role;
+  @Enumerated(EnumType.STRING)
+  private Role role;
 
   @Column(name = "active", columnDefinition = "boolean default true")
   private Boolean active = true;
