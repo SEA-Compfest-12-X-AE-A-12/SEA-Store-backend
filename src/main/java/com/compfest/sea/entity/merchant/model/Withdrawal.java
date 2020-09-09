@@ -21,11 +21,9 @@ public class Withdrawal {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column
-  private Integer amount;
+  @Column private Integer amount;
 
-  @Column
-  private Integer remainingBalance;
+  @Column private Integer remainingBalance;
 
   @Size(max = 50)
   @Column
@@ -46,7 +44,12 @@ public class Withdrawal {
   @Column(name = "timestamp")
   private Date timestamp;
 
-  public Withdrawal(Integer amount, String bankName, String accountNumber, Merchant merchant, Integer remainingBalance) {
+  public Withdrawal(
+      Integer amount,
+      String bankName,
+      String accountNumber,
+      Merchant merchant,
+      Integer remainingBalance) {
     this.amount = amount;
     this.remainingBalance = remainingBalance;
     this.bankName = bankName;

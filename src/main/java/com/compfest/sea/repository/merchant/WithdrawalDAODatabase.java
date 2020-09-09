@@ -17,8 +17,8 @@ public class WithdrawalDAODatabase implements WithdrawalDAO {
     return withdrawalDAOJPA.save(newWithdrawal);
   }
 
-    @Override
-    public List<Withdrawal> findAllByMerchant(Merchant merchant) {
-        return withdrawalDAOJPA.findAllByMerchant(merchant);
-    }
+  @Override
+  public List<Withdrawal> findAllByMerchant(Merchant merchant) {
+    return withdrawalDAOJPA.findAllByMerchant(merchant);
+  }
 }

@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface WithdrawalDAOJPA extends JpaRepository<Withdrawal, Integer> {
-    public List<Withdrawal> findAllByMerchant(Merchant merchant);
+  public List<Withdrawal> findAllByMerchant(Merchant merchant);
 }

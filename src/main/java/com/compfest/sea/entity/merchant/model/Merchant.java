@@ -21,10 +21,7 @@ public class Merchant {
   @Column(name = "user_id")
   private int userID;
 
-  @OneToOne
-  @MapsId
-  @JsonIgnore
-  private User user;
+  @OneToOne @MapsId @JsonIgnore private User user;
   private String description;
   private boolean isVerified;
   private int balance;
