@@ -31,7 +31,9 @@ public class ProposalUsecaseImpl implements ProposalUsecase {
   private final MerchantDAO merchantDAO;
 
   @Autowired
-  public ProposalUsecaseImpl(@Qualifier("ProposalDAODB") ProposalDAO proposalDAO, @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
+  public ProposalUsecaseImpl(
+      @Qualifier("ProposalDAODB") ProposalDAO proposalDAO,
+      @Qualifier("MerchantDAOList") MerchantDAO merchantDAO) {
     this.proposalDAO = proposalDAO;
     this.merchantDAO = merchantDAO;
   }

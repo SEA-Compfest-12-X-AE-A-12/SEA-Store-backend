@@ -13,25 +13,25 @@ import java.util.Optional;
 @Repository("ProposalDAODB")
 public class ProposalDAOImpl implements ProposalDAO {
 
-	@Autowired @Lazy ProposalDAOJPA proposalDAOJPA;
+  @Autowired @Lazy ProposalDAOJPA proposalDAOJPA;
 
-	@Override
-	public Proposal save(Proposal proposal) {
-		return proposalDAOJPA.save(proposal);
-	}
+  @Override
+  public Proposal save(Proposal proposal) {
+    return proposalDAOJPA.save(proposal);
+  }
 
-	@Override
-	public Optional<Proposal> findById(Integer integer) {
-		return proposalDAOJPA.findById(integer);
-	}
+  @Override
+  public Optional<Proposal> findById(Integer integer) {
+    return proposalDAOJPA.findById(integer);
+  }
 
-	@Override
-	public List<Proposal> findAll() {
-		return proposalDAOJPA.findAll();
-	}
+  @Override
+  public List<Proposal> findAll() {
+    return proposalDAOJPA.findAll();
+  }
 
-	@Override
-	public Page<Proposal> findAll(Pageable pageable) {
-		return proposalDAOJPA.findAll(pageable);
-	}
+  @Override
+  public Page<Proposal> findAll(Pageable pageable) {
+    return proposalDAOJPA.findAll(pageable);
+  }
 }

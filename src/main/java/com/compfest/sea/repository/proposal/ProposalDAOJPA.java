@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProposalDAOJPA extends JpaRepository<Proposal, Integer> {
-	Proposal save(Proposal proposal);
+  Proposal save(Proposal proposal);
 
-	Optional<Proposal> findById(Integer integer);
+  Optional<Proposal> findById(Integer integer);
 
-	List<Proposal> findAll();
+  List<Proposal> findAll();
 
-	Page<Proposal> findAll(Pageable pageable);
+  Page<Proposal> findAll(Pageable pageable);
 }
