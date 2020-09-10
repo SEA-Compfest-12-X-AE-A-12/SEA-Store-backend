@@ -53,7 +53,7 @@ public class TestUserUsecase {
 
   @Test
   public void whenGetUserByIdItShouldReturnAUser() {
-    User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
+    User user = new User("name", "email", "password", "phone", "address", Role.CUSTOMER);
     when(userDAO.findUserById(2)).thenReturn(user);
     User user2 = usecase.findUserById(2);
     verify(userDAO).findUserById(2);
@@ -68,7 +68,7 @@ public class TestUserUsecase {
 
   @Test
   public void whenUpdateUserItShouldReturnAUser() {
-    User user = new User(2, "name", "email", "password", "phone", "address", Role.CUSTOMER);
+    User user = new User("name", "email", "password", "phone", "address", Role.CUSTOMER);
     when(userDAO.updateUser(user.getId(), user)).thenReturn(user);
 
     User updatedUser = usecase.updateProfile(user.getId(), user);
