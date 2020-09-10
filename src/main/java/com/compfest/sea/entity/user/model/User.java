@@ -65,7 +65,7 @@ public class User implements UserDetails {
 
   public User(
       int id,
-      String najdme,
+      String name,
       String email,
       String password,
       String phone,
