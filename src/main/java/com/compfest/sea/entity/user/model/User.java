@@ -64,13 +64,7 @@ public class User implements UserDetails {
   private Merchant merchant;
 
   public User(
-      int id,
-      String name,
-      String email,
-      String password,
-      String phone,
-      String address,
-      Role role) {
+      int id, String name, String email, String password, String phone, String address, Role role) {
     this.id = id;
     this.name = name;
     this.email = email;
