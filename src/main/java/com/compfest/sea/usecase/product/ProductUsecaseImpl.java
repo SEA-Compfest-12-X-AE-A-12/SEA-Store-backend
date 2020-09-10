@@ -3,7 +3,9 @@ package com.compfest.sea.usecase.product;
 import com.compfest.sea.entity.category.Category;
 import com.compfest.sea.entity.product.payload.InsertRequestPayload;
 import com.compfest.sea.entity.product.model.Product;
+import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.repository.product.ProductDAO;
+import com.compfest.sea.repository.user.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,23 +20,29 @@ import static com.compfest.sea.entity.product.Adapter.convertInsertPayloadToMode
 public class ProductUsecaseImpl implements ProductUsecase {
 
   private final ProductDAO productDAO;
+  private final UserDAO userDAO;
 
   @Autowired
-  public ProductUsecaseImpl(@Qualifier("productRepoDB") ProductDAO productDAO) {
+  public ProductUsecaseImpl(
+      @Qualifier("productRepoDB") ProductDAO productDAO,
+      @Qualifier("UserDAOList") UserDAO userDAO) {
     this.productDAO = productDAO;
+    this.userDAO = userDAO;
   }
 
   @Override
   public List<String> insert(InsertRequestPayload insertRequestPayload) {
     List<String> messages = new ArrayList<>();
+    User merchant = null;
     try {
-      Product product = convertInsertPayloadToModel(insertRequestPayload);
-      messages.addAll(validateProduct(product));
+      merchant = validateInsertRequestProduct(messages, insertRequestPayload);
       if (!messages.isEmpty()) {
-        if (!Category.isValidCategory(insertRequestPayload.getCategory()))
+        if (!Category.isValidCategory(insertRequestPayload.getCategory())) {
           messages.add("Invalid payload of category");
+        }
         return messages;
       }
+      Product product = convertInsertPayloadToModel(insertRequestPayload, merchant);
       productDAO.save(product);
       messages.add("Success insert new product");
     } catch (Exception e) {
@@ -74,7 +82,7 @@ public class ProductUsecaseImpl implements ProductUsecase {
   @Override
   public List<Product> getAll() {
     try {
-      return productDAO.findAll();
+      return productDAO.findAllByActive(true);
     } catch (Exception e) {
       return new ArrayList<>();
     }
@@ -106,18 +114,29 @@ public class ProductUsecaseImpl implements ProductUsecase {
     if (product.getQuantity() <= 0) {
       messages.add("Failed, Quantity must be more than 0");
     }
-    messages.addAll(verifyMerchant(product));
     return messages;
+  }
+
+  public User validateInsertRequestProduct(
+      List<String> messages, InsertRequestPayload insertRequestPayload) {
+    User merchant = userDAO.findUserById(insertRequestPayload.getMerchantId());
+    if (merchant == null) {
+      messages.add("Failed, Merchant Id " + insertRequestPayload.getMerchantId() + " not found");
+    }
+    Product product = convertInsertPayloadToModel(insertRequestPayload, merchant);
+    messages.addAll(validateProduct(product));
+    return merchant;
   }
 
   public List<String> verifyOwner(Product productUpdate) {
     List<String> messages = new ArrayList<>();
     try {
-      messages.addAll(verifyMerchant(productUpdate));
       Product product = productDAO.findById(productUpdate.getId()).orElse(null);
       if (product == null) {
         messages.add("Failed, no such product");
-      } else if (!product.getMerchantId().equals(productUpdate.getMerchantId())) {
+      } else if (productUpdate.getMerchant() == null) {
+        messages.add("Failed, Merchant Id " + productUpdate.getMerchant().getId() + " not found");
+      } else if (!(product.getMerchant().getId() == productUpdate.getMerchant().getId())) {
         messages.add("Failed, You cannot update someone else's product");
       }
     } catch (Exception e) {
@@ -126,9 +145,9 @@ public class ProductUsecaseImpl implements ProductUsecase {
     return messages;
   }
 
-  public List<String> verifyMerchant(Product product) {
+  public List<String> verifyMerchant(Integer merchantId) {
     if (false) { // TODO: waiting for merchant domain
-      return Arrays.asList("Failed, Merchant Id " + product.getMerchantId() + "is not found");
+      return Arrays.asList("Failed, Merchant Id " + merchantId + "is not found");
     }
     return new ArrayList<>();
   }
