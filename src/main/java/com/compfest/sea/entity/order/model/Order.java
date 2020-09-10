@@ -43,4 +43,9 @@ public class Order {
 
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
   private List<OrderDetail> orderDetails;
+
+  public Order(OrderStatus status, User customer) {
+    this.status = status;
+    this.customer = customer;
+  }
 }

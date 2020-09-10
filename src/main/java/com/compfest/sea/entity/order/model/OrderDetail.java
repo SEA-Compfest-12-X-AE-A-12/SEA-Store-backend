@@ -26,4 +26,10 @@ public class OrderDetail {
   private Product product;
 
   private Integer quantity;
+
+  public OrderDetail(Order order, Product product, Integer quantity) {
+    this.order = order;
+    this.product = product;
+    this.quantity = quantity;
+  }
 }
