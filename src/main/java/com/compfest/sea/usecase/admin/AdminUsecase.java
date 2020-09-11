@@ -3,9 +3,9 @@ package com.compfest.sea.usecase.admin;
 import com.compfest.sea.entity.user.model.User;
 
 public interface AdminUsecase {
-    User registerAdmin(User user);
+  User registerAdmin(User user);
 
-    void acceptTransaction();
+  void acceptTransaction();
 
-    void rejectTransaction();
+  void rejectTransaction();
 }
