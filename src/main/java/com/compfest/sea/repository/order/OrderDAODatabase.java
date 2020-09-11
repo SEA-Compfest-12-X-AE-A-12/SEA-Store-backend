@@ -1,6 +1,7 @@
 package com.compfest.sea.repository.order;
 
 import com.compfest.sea.entity.order.model.Order;
+import com.compfest.sea.entity.order.model.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,7 @@ public class OrderDAODatabase implements OrderDAO {
 	}
 
 	@Override
-	public Optional<Order> findByCustomerIdAndStatus(Integer customerId, String status) {
+	public Optional<Order> findByCustomerIdAndStatus(Integer customerId, OrderStatus status) {
 		return orderDAOJPACustom.findByCustomerIdAndStatus(customerId, status);
 	}
 }

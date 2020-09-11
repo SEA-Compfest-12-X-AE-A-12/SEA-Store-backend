@@ -31,7 +31,7 @@ public class Order {
   private Date createdAt;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "customer_id")
+  @JoinColumn(name = "customer_id", referencedColumnName = "id")
   private User customer;
 
   @Column(name = "reviewer_id")

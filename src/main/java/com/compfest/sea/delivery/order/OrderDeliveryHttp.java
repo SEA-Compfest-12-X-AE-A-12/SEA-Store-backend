@@ -4,10 +4,7 @@ import com.compfest.sea.entity.order.payload.AddToCartRequestPayload;
 import com.compfest.sea.usecase.order.OrderUsecase;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class OrderDeliveryHttp implements OrderDelivery {
 
 	@Override
 	@PostMapping("/addCart")
-	public List<String> addToCart(AddToCartRequestPayload addToCartRequestPayload) {
+	public List<String> addToCart(@RequestBody AddToCartRequestPayload addToCartRequestPayload) {
 		return orderUsecase.addToCart(addToCartRequestPayload);
 	}
 }

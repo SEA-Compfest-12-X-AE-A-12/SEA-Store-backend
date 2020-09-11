@@ -45,7 +45,7 @@ public class OrderUsecaseImpl implements OrderUsecase {
 	    Order order =
 		    orderDAO
 			    .findByCustomerIdAndStatus(
-				    addToCartRequestPayload.getUserId(), OrderStatus.IN_CART.toString())
+				    addToCartRequestPayload.getUserId(), OrderStatus.IN_CART)
 			    .orElse(null);
 	    if (order == null) {
 		    order = new Order(OrderStatus.IN_CART, user);
