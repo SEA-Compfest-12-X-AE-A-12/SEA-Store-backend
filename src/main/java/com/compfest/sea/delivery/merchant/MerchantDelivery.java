@@ -67,11 +67,11 @@ public class MerchantDelivery {
 
   @PostMapping("/withdraw")
   public Withdrawal withdrawBalance(
-      @RequestBody WithdrawBalanceRequest request, Authentication auth) throws Exception {
+          @RequestBody WithdrawBalanceRequest request, Authentication auth) throws Exception {
     User user = (User) auth.getPrincipal();
     Merchant merchant = merchantUsecase.findByUserId(user.getId());
     return merchantUsecase.withdrawBalance(
-        merchant, request.getBankName(), request.getAccountNumber(), request.getAmount());
+            merchant, request.getBankName(), request.getAccountNumber(), request.getAmount());
   }
 
   @GetMapping("/balance-history")
