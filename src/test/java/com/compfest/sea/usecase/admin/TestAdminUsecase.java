@@ -11,23 +11,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class TestAdminUsecase {
-    private AdminUsecase adminUsecase;
+  private AdminUsecase adminUsecase;
 
-    @Mock
-    private UserUsecase userUsecase;
+  @Mock private UserUsecase userUsecase;
 
-    @BeforeEach
-    void setUp() {
-        adminUsecase = new AdminUsecaseImpl(userUsecase);
-    }
+  @BeforeEach
+  void setUp() {
+    adminUsecase = new AdminUsecaseImpl(userUsecase);
+  }
 
-    @Test
-    public void whenRegisterAdmin_shouldReturnRegisteredAdmin() {
-        Role customer = Role.CUSTOMER;
-        User user = new User("test", "test@gmail.com", "test123", "0123456789", "test", customer);
+  @Test
+  public void whenRegisterAdmin_shouldReturnRegisteredAdmin() {
+    Role customer = Role.CUSTOMER;
+    User user = new User("test", "test@gmail.com", "test123", "0123456789", "test", customer);
 
-        adminUsecase.registerAdmin(user);
-        Mockito.verify(userUsecase, Mockito.times(1)).createUser(user);
-    }
-
+    adminUsecase.registerAdmin(user);
+    Mockito.verify(userUsecase, Mockito.times(1)).createUser(user);
+  }
 }
