@@ -19,9 +19,9 @@ public class MerchantUsecaseImpl implements MerchantUsecase {
 
   @Autowired
   public MerchantUsecaseImpl(
-          @Qualifier("merchantRepoDB") MerchantDAO merchantDAO,
-          @Qualifier("withdrawalRepoDB") WithdrawalDAO withdrawalDAO,
-          @Qualifier("UserUsecaseImpl") UserUsecase userUsecase) {
+      @Qualifier("merchantRepoDB") MerchantDAO merchantDAO,
+      @Qualifier("withdrawalRepoDB") WithdrawalDAO withdrawalDAO,
+      @Qualifier("UserUsecaseImpl") UserUsecase userUsecase) {
     this.merchantDAO = merchantDAO;
     this.withdrawalDAO = withdrawalDAO;
     this.userUsecase = userUsecase;
@@ -69,13 +69,13 @@ public class MerchantUsecaseImpl implements MerchantUsecase {
 
   @Override
   public Withdrawal withdrawBalance(
-          Merchant merchant, String bankName, String accountNumber, int amount) throws Exception {
+      Merchant merchant, String bankName, String accountNumber, int amount) throws Exception {
     int balance = merchant.getBalance();
     if (amount >= 0 && amount <= balance) {
       merchant.setBalance(balance - amount);
       merchantDAO.updateMerchant(merchant.getUserID(), merchant);
       return withdrawalDAO.insert(
-              new Withdrawal(amount, bankName, accountNumber, merchant, merchant.getBalance()));
+          new Withdrawal(amount, bankName, accountNumber, merchant, merchant.getBalance()));
     } else {
       throw new Exception("Invalid amount");
     }
