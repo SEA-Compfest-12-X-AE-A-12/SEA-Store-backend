@@ -13,15 +13,15 @@ import java.util.List;
 @RequestMapping("/api/v1/orders")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderDeliveryHttp implements OrderDelivery {
-	private final OrderUsecase orderUsecase;
+  private final OrderUsecase orderUsecase;
 
-	public OrderDeliveryHttp(@Qualifier("OrderUsecaseImpl") OrderUsecase orderUsecase) {
-		this.orderUsecase = orderUsecase;
-	}
+  public OrderDeliveryHttp(@Qualifier("OrderUsecaseImpl") OrderUsecase orderUsecase) {
+    this.orderUsecase = orderUsecase;
+  }
 
-	@Override
-	@PostMapping("/addCart")
-	public List<String> addToCart(@RequestBody AddToCartRequestPayload addToCartRequestPayload) {
-		return orderUsecase.addToCart(addToCartRequestPayload);
-	}
+  @Override
+  @PostMapping("/addCart")
+  public List<String> addToCart(@RequestBody AddToCartRequestPayload addToCartRequestPayload) {
+    return orderUsecase.addToCart(addToCartRequestPayload);
+  }
 }

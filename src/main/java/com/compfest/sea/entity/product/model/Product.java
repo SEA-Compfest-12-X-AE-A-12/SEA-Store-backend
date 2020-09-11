@@ -6,7 +6,6 @@ import com.compfest.sea.entity.user.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.ToString.Exclude;
 
 import javax.persistence.*;
@@ -32,7 +31,6 @@ public class Product {
 
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
-
 
   @Exclude
   @JsonIgnore

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddToCartRequestPayload {
-	private Integer userId;
-	private Integer productId;
-	private Integer quantity;
+  private Integer userId;
+  private Integer productId;
+  private Integer quantity;
 }

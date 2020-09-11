@@ -26,7 +26,7 @@ public class OrderUsecaseImpl implements OrderUsecase {
 
   public OrderUsecaseImpl(
       @Qualifier("OrderDAODB") OrderDAO orderDAO,
-      @Qualifier("OrderDetailDAODB")OrderDetailDAO orderDetailDAO,
+      @Qualifier("OrderDetailDAODB") OrderDetailDAO orderDetailDAO,
       UserUsecase userUsecase,
       ProductUsecase productUsecase) {
     this.orderDAO = orderDAO;
@@ -37,37 +37,38 @@ public class OrderUsecaseImpl implements OrderUsecase {
 
   @Override
   public List<String> addToCart(AddToCartRequestPayload addToCartRequestPayload) {
-  	List<String> messages = new ArrayList<>();
-    try{
-	    Product product = productUsecase.get(addToCartRequestPayload.getProductId());
-	    messages.addAll(validateAddToCart(addToCartRequestPayload,product));
-	    User user = userUsecase.findUserById(addToCartRequestPayload.getUserId());
-	    Order order =
-		    orderDAO
-			    .findByCustomerIdAndStatus(
-				    addToCartRequestPayload.getUserId(), OrderStatus.IN_CART)
-			    .orElse(null);
-	    if (order == null) {
-		    order = new Order(OrderStatus.IN_CART, user);
-		    order = orderDAO.save(order);
-	    }
-	    OrderDetail orderDetail =
-		    new OrderDetail(order, product, addToCartRequestPayload.getQuantity());
-	    orderDetailDAO.save(orderDetail);
+    List<String> messages = new ArrayList<>();
+    try {
+      Product product = productUsecase.get(addToCartRequestPayload.getProductId());
+      messages.addAll(validateAddToCart(addToCartRequestPayload, product));
+      User user = userUsecase.findUserById(addToCartRequestPayload.getUserId());
+      Order order =
+          orderDAO
+              .findByCustomerIdAndStatus(addToCartRequestPayload.getUserId(), OrderStatus.IN_CART)
+              .orElse(null);
+      if (order == null) {
+        order = new Order(OrderStatus.IN_CART, user);
+        order = orderDAO.save(order);
+      }
+      OrderDetail orderDetail =
+          new OrderDetail(order, product, addToCartRequestPayload.getQuantity());
+      orderDetailDAO.save(orderDetail);
 
-	    messages.add("Success add "+product.getName()+" to cart");
-    }catch(Exception e){
-			messages.add("Failed, "+e);
+      messages.add("Success add " + product.getName() + " to cart");
+    } catch (Exception e) {
+      messages.add("Failed, " + e);
     }
     return messages;
   }
 
-  private List<String> validateAddToCart(AddToCartRequestPayload addToCartRequestPayload, Product product){
-  	if(product == null){
-			return Arrays.asList("Failed, product not found");
-	  }else if(addToCartRequestPayload.getQuantity() < 0 && addToCartRequestPayload.getQuantity() > product.getQuantity() ){
-			return Arrays.asList("Failed, invalid amount of quantity");
-	  }
-  	return new ArrayList<>();
-	}
+  private List<String> validateAddToCart(
+      AddToCartRequestPayload addToCartRequestPayload, Product product) {
+    if (product == null) {
+      return Arrays.asList("Failed, product not found");
+    } else if (addToCartRequestPayload.getQuantity() < 0
+        && addToCartRequestPayload.getQuantity() > product.getQuantity()) {
+      return Arrays.asList("Failed, invalid amount of quantity");
+    }
+    return new ArrayList<>();
+  }
 }

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository("OrderDetailDAODB")
 public class OrderDetailDAOImpl implements OrderDetailDAO {
-	@Autowired@Lazy private OrderDetailDAOJPA orderDetailDAOJPA;
-	@Override
-	public OrderDetail save(OrderDetail orderDetail) {
-		return orderDetailDAOJPA.save(orderDetail);
-	}
+  @Autowired @Lazy private OrderDetailDAOJPA orderDetailDAOJPA;
+
+  @Override
+  public OrderDetail save(OrderDetail orderDetail) {
+    return orderDetailDAOJPA.save(orderDetail);
+  }
 }

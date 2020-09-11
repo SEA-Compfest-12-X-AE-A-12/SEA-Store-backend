@@ -10,20 +10,21 @@ import java.util.Optional;
 
 @Repository("OrderDAODB")
 public class OrderDAODatabase implements OrderDAO {
-	@Autowired @Lazy private OrderDAOJPA orderDAOJPA;
-	@Autowired @Lazy private OrderDAOJPACustom orderDAOJPACustom;
-	@Override
-	public Order save(Order order) {
-		return orderDAOJPA.save(order);
-	}
+  @Autowired @Lazy private OrderDAOJPA orderDAOJPA;
+  @Autowired @Lazy private OrderDAOJPACustom orderDAOJPACustom;
 
-	@Override
-	public Optional<Order> findById(Integer id) {
-		return orderDAOJPA.findById(id);
-	}
+  @Override
+  public Order save(Order order) {
+    return orderDAOJPA.save(order);
+  }
 
-	@Override
-	public Optional<Order> findByCustomerIdAndStatus(Integer customerId, OrderStatus status) {
-		return orderDAOJPACustom.findByCustomerIdAndStatus(customerId, status);
-	}
+  @Override
+  public Optional<Order> findById(Integer id) {
+    return orderDAOJPA.findById(id);
+  }
+
+  @Override
+  public Optional<Order> findByCustomerIdAndStatus(Integer customerId, OrderStatus status) {
+    return orderDAOJPACustom.findByCustomerIdAndStatus(customerId, status);
+  }
 }

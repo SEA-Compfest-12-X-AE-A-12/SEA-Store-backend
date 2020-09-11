@@ -5,5 +5,5 @@ import com.compfest.sea.entity.order.payload.AddToCartRequestPayload;
 import java.util.List;
 
 public interface OrderUsecase {
-	List<String> addToCart(AddToCartRequestPayload addToCartRequestPayload);
+  List<String> addToCart(AddToCartRequestPayload addToCartRequestPayload);
 }
