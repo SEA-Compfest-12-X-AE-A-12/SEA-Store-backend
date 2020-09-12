@@ -1,6 +1,5 @@
 package com.compfest.sea.delivery.admin;
 
-import com.compfest.sea.delivery.user.UserAdapter;
 import com.compfest.sea.entity.admin.payload.InsertAdminRequestPayload;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.exception.InvalidAdminTokenException;
@@ -12,21 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/admin")
 @RestController
 public class AdminDelivery {
-    private AdminUsecase adminUsecase;
+  private AdminUsecase adminUsecase;
 
-    @Autowired
-    public AdminDelivery(@Qualifier("AdminUsecaseImpl") AdminUsecase adminUsecase) {
-        this.adminUsecase = adminUsecase;
+  @Autowired
+  public AdminDelivery(@Qualifier("AdminUsecaseImpl") AdminUsecase adminUsecase) {
+    this.adminUsecase = adminUsecase;
+  }
+
+  @PostMapping
+  public User register(@RequestBody InsertAdminRequestPayload payload) {
+    if (payload.getToken() != System.getenv("token")) {
+      throw new InvalidAdminTokenException("admin");
     }
-
-    @PostMapping
-    public User register(@RequestBody InsertAdminRequestPayload payload) {
-        if (payload.getToken() != System.getenv("token")) {
-            throw new InvalidAdminTokenException("admin");
-        }
-        User adminUser = AdminAdapter.convertInsertAdminPayloadToUser(payload);
-        return adminUsecase.registerAdmin(adminUser);
-    }
-
-
+    User adminUser = AdminAdapter.convertInsertAdminPayloadToUser(payload);
+    return adminUsecase.registerAdmin(adminUser);
+  }
 }
