@@ -1,6 +1,5 @@
 package com.compfest.sea.entity.admin.payload;
 
-import com.compfest.sea.entity.user.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
