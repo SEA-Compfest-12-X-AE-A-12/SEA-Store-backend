@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers(HttpMethod.POST,"/api/v1/users"); // register
+    web.ignoring().antMatchers(HttpMethod.POST, "/api/v1/users"); // register
   }
 
   @Bean
