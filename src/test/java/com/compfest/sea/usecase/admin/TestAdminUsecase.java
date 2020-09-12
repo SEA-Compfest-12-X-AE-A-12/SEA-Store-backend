@@ -22,8 +22,8 @@ public class TestAdminUsecase {
 
   @Test
   public void whenRegisterAdmin_shouldReturnRegisteredAdmin() {
-    Role customer = Role.CUSTOMER;
-    User user = new User("test", "test@gmail.com", "test123", "0123456789", "test", customer);
+    Role admin = Role.ADMIN;
+    User user = new User("test", "test@gmail.com", "test123", "0123456789", "test", admin);
 
     adminUsecase.registerAdmin(user);
     Mockito.verify(userUsecase, Mockito.times(1)).createUser(user);
