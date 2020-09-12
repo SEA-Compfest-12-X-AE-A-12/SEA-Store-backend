@@ -12,6 +12,5 @@ public class InsertAdminRequestPayload {
   private String password;
   private String phone;
   private String address;
-  private Role role;
   private String token;
 }

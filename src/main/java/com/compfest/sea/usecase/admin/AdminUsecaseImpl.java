@@ -1,5 +1,6 @@
 package com.compfest.sea.usecase.admin;
 
+import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.usecase.user.UserUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ class AdminUsecaseImpl implements AdminUsecase {
 
   @Override
   public User registerAdmin(User user) {
+    user.setRole(Role.ADMIN);
     User createdUser = userUsecase.createUser(user);
     return createdUser;
   }
