@@ -3,8 +3,10 @@ package com.compfest.sea.entity.product.model;
 import com.compfest.sea.entity.category.Category;
 import com.compfest.sea.entity.order.model.OrderDetail;
 import com.compfest.sea.entity.user.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString.Exclude;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,6 +32,8 @@ public class Product {
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
 
+  @Exclude
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "merchant_id")
   private User merchant;

@@ -31,7 +31,7 @@ public class Order {
   private Date createdAt;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "customer_id")
+  @JoinColumn(name = "customer_id", referencedColumnName = "id")
   private User customer;
 
   @Column(name = "reviewer_id")
@@ -43,4 +43,9 @@ public class Order {
 
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
   private List<OrderDetail> orderDetails;
+
+  public Order(OrderStatus status, User customer) {
+    this.status = status;
+    this.customer = customer;
+  }
 }
