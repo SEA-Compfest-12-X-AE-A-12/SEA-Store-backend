@@ -1,6 +1,7 @@
 package com.compfest.sea.delivery.user;
 
 import java.util.List;
+import com.compfest.sea.entity.user.model.Role;
 import com.compfest.sea.entity.user.model.User;
 import com.compfest.sea.entity.user.payload.InsertUserRequestPayload;
 import com.compfest.sea.entity.user.payload.LoginRequestPayload;
@@ -38,9 +39,8 @@ public class UserDelivery {
   @PostMapping
   public User register(@RequestBody InsertUserRequestPayload payload) {
     User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
-    User user =
-        userUsecase.findUserWithRoleByEmail(
-            convertedFromPayload.getEmail(), convertedFromPayload.getRole());
+    User user = userUsecase.findUserWithRoleByEmail(convertedFromPayload.getEmail(),
+        convertedFromPayload.getRole());
     if (user != null) {
       throw new ResourceAlreadyExistException("user");
     }
@@ -72,6 +72,12 @@ public class UserDelivery {
       throw new ResourceNotFoundException("user");
     }
     userUsecase.deleteUser(id);
+  }
+
+  @GetMapping("{email}/{role}")
+  public User getUserWithRole(@PathVariable("email") String email,
+      @PathVariable("role") Role role) {
+    return userUsecase.findUserWithRoleByEmail(email, role);
   }
 
   @PostMapping("/login")
