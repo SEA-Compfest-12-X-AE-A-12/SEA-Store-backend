@@ -100,7 +100,7 @@ https://trello.com/invite/b/GTMA2kHG/3bed0222c3450ff616cbd3d33814918e/x-%C3%A6-a
 	* Memungkinkan implementasi yang berbeda, misalnya untuk UserDAO bisa menggunakan DB ataupun ArrayList
 	* ada nya interface untuk fleksibilitas implementasi pada usecase, repository, delivery
 * Adapter Pattern: Melakukan konversi payload API menjadi model
-* Facade Pattern: Dengan Frontend menaggil API Backend maka tidak perlu implement logic tersendiri.
+* Facade Pattern: Dengan Frontend memanggil API Backend maka tidak perlu implement logic tersendiri.
 
 
 ## ERD:
