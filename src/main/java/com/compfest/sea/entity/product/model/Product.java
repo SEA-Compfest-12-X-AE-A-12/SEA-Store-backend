@@ -32,8 +32,6 @@ public class Product {
   @Column(name = "quantity", nullable = false)
   private Integer quantity;
 
-  @Exclude
-  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "merchant_id")
   private User merchant;
@@ -48,15 +46,8 @@ public class Product {
   @OneToMany(mappedBy = "product")
   private List<OrderDetail> orderDetails;
 
-  public Product(
-      Integer id,
-      String name,
-      String description,
-      Integer price,
-      Integer quantity,
-      User merchant,
-      Category category,
-      Boolean active) {
+  public Product(Integer id, String name, String description, Integer price, Integer quantity,
+      User merchant, Category category, Boolean active) {
     this.id = id;
     this.name = name;
     this.description = description;
