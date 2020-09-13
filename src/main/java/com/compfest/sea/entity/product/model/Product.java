@@ -3,10 +3,8 @@ package com.compfest.sea.entity.product.model;
 import com.compfest.sea.entity.category.Category;
 import com.compfest.sea.entity.order.model.OrderDetail;
 import com.compfest.sea.entity.user.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString.Exclude;
 
 import javax.persistence.*;
 import java.util.List;
@@ -46,8 +44,15 @@ public class Product {
   @OneToMany(mappedBy = "product")
   private List<OrderDetail> orderDetails;
 
-  public Product(Integer id, String name, String description, Integer price, Integer quantity,
-      User merchant, Category category, Boolean active) {
+  public Product(
+      Integer id,
+      String name,
+      String description,
+      Integer price,
+      Integer quantity,
+      User merchant,
+      Category category,
+      Boolean active) {
     this.id = id;
     this.name = name;
     this.description = description;
