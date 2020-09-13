@@ -39,8 +39,9 @@ public class UserDelivery {
   @PostMapping
   public User register(@RequestBody InsertUserRequestPayload payload) {
     User convertedFromPayload = UserAdapter.convertInsertUserRequestPayloadToUser(payload);
-    User user = userUsecase.findUserWithRoleByEmail(convertedFromPayload.getEmail(),
-        convertedFromPayload.getRole());
+    User user =
+        userUsecase.findUserWithRoleByEmail(
+            convertedFromPayload.getEmail(), convertedFromPayload.getRole());
     if (user != null) {
       throw new ResourceAlreadyExistException("user");
     }
@@ -75,8 +76,8 @@ public class UserDelivery {
   }
 
   @GetMapping("{email}/{role}")
-  public User getUserWithRole(@PathVariable("email") String email,
-      @PathVariable("role") Role role) {
+  public User getUserWithRole(
+      @PathVariable("email") String email, @PathVariable("role") Role role) {
     return userUsecase.findUserWithRoleByEmail(email, role);
   }
 
