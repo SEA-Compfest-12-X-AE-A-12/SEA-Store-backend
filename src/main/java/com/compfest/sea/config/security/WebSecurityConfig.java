@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,9 +23,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-  @Autowired UserUsecase userUsecase;
+  @Autowired
+  UserUsecase userUsecase;
 
-  @Autowired private AuthEntryPointJwt unauthorizedHandler;
+  @Autowired
+  private AuthEntryPointJwt unauthorizedHandler;
 
   @Bean
   public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -50,39 +53,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.cors()
-        .and()
-        .csrf()
-        .disable()
-        .exceptionHandling()
-        .authenticationEntryPoint(unauthorizedHandler)
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .authorizeRequests()
-        .antMatchers(
-            "/api/v1/users/login",
-            "/swagger-ui.html**",
-            "/webjars/**",
-            "/swagger-resources/**",
-            "/v2/api-docs")
-        .permitAll()
-        .antMatchers(HttpMethod.POST, "/api/v1/users")
-        .permitAll()
-        .antMatchers(
-            HttpMethod.GET,
-            "/api/v1/categories/",
-            "/api/v1/products/",
-            "/api/v1/products/detail/{\\d+}",
-            "/api/v1/products/{\\d+}")
-        .permitAll()
-        .antMatchers(HttpMethod.POST, "/api/v1/proposals/upload")
-        .permitAll()
-        .anyRequest()
-        .authenticated();
+    http.cors().and().csrf().disable().exceptionHandling()
+        .authenticationEntryPoint(unauthorizedHandler).and().sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+        .antMatchers("/api/v1/users/login", "/swagger-ui.html**", "/webjars/**",
+            "/swagger-resources/**", "/v2/api-docs")
+        .permitAll().antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/v1/categories/", "/api/v1/products/",
+            "/api/v1/products/detail/{\\d+}", "/api/v1/products/{\\d+}")
+        .permitAll().antMatchers(HttpMethod.POST, "/api/v1/proposals/upload").permitAll()
+        .anyRequest().authenticated();
 
-    http.addFilterBefore(
-        authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(authenticationJwtTokenFilter(),
+        UsernamePasswordAuthenticationFilter.class);
+  }
+
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().antMatchers(HttpMethod.POST, "/api/v1/merchants");
   }
 }
