@@ -32,12 +32,4 @@ public class APIExceptionHandler {
         new ErrorDetails(new Date(), "user not authorized", request.getDescription(false));
     return new ResponseEntity<>(details, HttpStatus.CONFLICT);
   }
-
-  @ExceptionHandler(value = {InvalidAdminTokenException.class})
-  public ResponseEntity<Object> handleInvalidAdminToken(
-      NotAuthorizedException ex, WebRequest request) {
-    ErrorDetails details =
-        new ErrorDetails(new Date(), "invalid admin token", request.getDescription(false));
-    return new ResponseEntity<>(details, HttpStatus.CONFLICT);
-  }
 }
