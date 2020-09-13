@@ -1,20 +1,24 @@
 package com.compfest.sea.entity.user.model;
 
 import com.compfest.sea.entity.merchant.model.Merchant;
+import com.compfest.sea.entity.order.model.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,13 +32,16 @@ public class User implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @NotBlank
   @Size(max = 100)
   private String name;
 
+  @NotBlank
   @Size(max = 50)
   @Email
   private String email;
 
+  @NotBlank
   @Size(max = 100)
   @JsonProperty(access = Access.WRITE_ONLY)
   private String password;
@@ -46,6 +53,7 @@ public class User implements UserDetails {
   @Size(max = 100)
   private String address;
 
+  @NotBlank
   @Enumerated(EnumType.STRING)
   private Role role;
 
@@ -54,6 +62,7 @@ public class User implements UserDetails {
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   @JsonIgnore
+  @ToString.Exclude
   private Merchant merchant;
 
   public User(
@@ -66,6 +75,10 @@ public class User implements UserDetails {
     this.address = address;
     this.role = role;
   }
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "customer")
+  private List<Order> orders;
 
   public User(String name, String email, String password, String phone, String address, Role role) {
     this.name = name;

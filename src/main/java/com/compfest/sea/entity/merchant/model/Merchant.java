@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +27,7 @@ public class Merchant {
   private boolean isVerified;
   private int balance;
 
+  @ToString.Exclude
   @OneToMany(mappedBy = "merchant")
   private List<Proposal> proposals;
 
