@@ -53,7 +53,6 @@ public class User implements UserDetails {
   @Size(max = 100)
   private String address;
 
-  @NotBlank
   @Enumerated(EnumType.STRING)
   private Role role;
 
